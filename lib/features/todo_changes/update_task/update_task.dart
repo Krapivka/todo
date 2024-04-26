@@ -1,0 +1,221 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:todo/core/data/models/task.dart';
+
+import 'package:todo/core/domain/repositories/task_repository.dart';
+import 'package:todo/core/utils/constants/Palette.dart';
+import 'package:todo/core/utils/snack_bar/snack_bar.dart';
+import 'package:todo/features/todo_changes/widgets/text_field_todo_changes.dart';
+import 'package:todo/features/settings/data/repository/abstract_settings_repository.dart';
+import 'package:todo/features/todo_changes/update_task/bloc/update_task_bloc.dart';
+import 'package:todo/generated/l10n.dart';
+import 'package:todo/router/router.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+@RoutePage()
+class UpdateTaskPage extends StatelessWidget {
+  const UpdateTaskPage({
+    super.key,
+    required this.taskmodel,
+  });
+
+  final TaskModel taskmodel;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => UpdateTaskBloc(
+          context.read<AbstractTaskRepository>(),
+          taskmodel,
+          context.read<AbstractSettingsRepository>()),
+      child: UpdateTaskPageView(),
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class UpdateTaskPageView extends StatelessWidget {
+  UpdateTaskPageView({
+    super.key,
+  });
+  TextEditingController nameController = TextEditingController();
+  TextEditingController dataController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<UpdateTaskBloc>(context).state;
+    nameController.text = bloc.title;
+    dataController.text = bloc.dateTime.toString().split(' ')[0];
+    return BlocConsumer<UpdateTaskBloc, UpdateTaskState>(
+        listener: (context, state) {
+      if (state.status == UpdateTaskStatus.validatorFailure) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            AppSnackBar.getSnackBar(S.of(context).fillInTheRequiredFields));
+      }
+      if (state.status == UpdateTaskStatus.success) {
+        AutoRouter.of(context).pushAndPopUntil(const HomeRoute(),
+            predicate: (Route<dynamic> route) => false);
+      }
+    }, builder: (context, state) {
+      return Scaffold(
+          appBar: AppBar(
+            title: Text(
+              S.of(context).updateTask,
+            ),
+            centerTitle: true,
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    context
+                        .read<UpdateTaskBloc>()
+                        .add(UpdateTaskDelete(state.id));
+                  },
+                  icon: const Icon(Icons.delete_outline_outlined))
+            ],
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // const EditableImage(),
+                  TextFieldTaskChanges(
+                    labelText: S.of(context).enterNameInTextField,
+                    hintText: S.of(context).hintTextNameInTextField,
+                    onChanged: (value) {
+                      context
+                          .read<UpdateTaskBloc>()
+                          .add(UpdateTaskTitleChanged(value));
+                    },
+                    controller: nameController,
+                    icon: const Icon(Icons.task),
+                  ),
+                  // _TextField(
+                  //   labelText: "Enter date",
+                  //   hintText: "Date",
+                  //   showCursor: false,
+                  //   controller: dataController,
+                  //   onTap: () async {
+                  //     final bloc = BlocProvider.of<UpdateTaskBloc>(context);
+                  //     final birthdate = await showDatePicker(
+                  //         context: context,
+                  //         initialDate: DateTime.now(),
+                  //         firstDate: DateTime(1930),
+                  //         lastDate: DateTime.now());
+
+                  //     if (birthdate != null) {
+                  //       bloc.add(UpdateTaskDateTap(birthdate));
+                  //       dataController.text = birthdate.toString().split(' ')[0];
+                  //     }
+                  //   },
+                  //   icon: const Icon(Icons.date_range_outlined),
+                  // ),
+                  SizedBox(
+                    height: 100,
+                    child: DatePicker(
+                      onDateTimeChanged: (DateTime value) {
+                        BlocProvider.of<UpdateTaskBloc>(context)
+                            .add(UpdateTaskDateTap(value));
+                      },
+                    ),
+                  ),
+                  const _ButtonSaveTask(),
+                ],
+              ),
+            ),
+          ));
+    });
+  }
+}
+
+// class EditableImage extends StatelessWidget {
+//   const EditableImage();
+
+//   @override
+//   Widget build(BuildContext context) {
+//     final bloc = context.watch<UpdateTaskBloc>();
+//     final width = MediaQuery.of(context).size.width / 3;
+//     final avatarPath = bloc.state.file.absolute.path;
+//     return Center(
+//       child: Material(
+//         child: InkWell(
+//           onTap: () {
+//             bloc.add(const UpdateTaskImageTap());
+//           },
+//           child: Ink(
+//             child: Stack(children: [
+//               ClipRRect(
+//                 borderRadius: BorderRadius.circular(20),
+//                 child: Image(
+//                     fit: BoxFit.cover,
+//                     width: double.infinity,
+//                     height: MediaQuery.of(context).size.height / 3,
+//                     image: avatarPath == '/'
+//                         ? const AssetImage(
+//                             "assets/images/default_task_image.png")
+//                         : FileImage(bloc.state.file) as ImageProvider),
+//               ),
+//               Positioned(
+//                 right: 5,
+//                 bottom: 5,
+//                 child: FloatingActionButton(
+//                   mini: true,
+//                   onPressed: () {
+//                     bloc.add(const UpdateTaskImageTap());
+//                   },
+//                   child: const Icon(Icons.brush),
+//                 ),
+//               ),
+//             ]),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+class _ButtonSaveTask extends StatelessWidget {
+  const _ButtonSaveTask();
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        context.read<UpdateTaskBloc>().add(const UpdateTaskSave());
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Palette.primaryAccent,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Text(
+            S.of(context).updateTask,
+            style: const TextStyle(color: Palette.secondaryLight),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class DatePicker extends StatelessWidget {
+  const DatePicker({super.key, required this.onDateTimeChanged});
+
+  final void Function(DateTime) onDateTimeChanged;
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<UpdateTaskBloc, UpdateTaskState>(
+      builder: (context, state) {
+        return CupertinoDatePicker(
+            minimumDate: DateTime(1930),
+            maximumDate: DateTime(2100),
+            mode: CupertinoDatePickerMode.date,
+            initialDateTime: state.dateTime,
+            onDateTimeChanged: onDateTimeChanged);
+      },
+    );
+  }
+}
