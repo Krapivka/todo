@@ -39,6 +39,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "calendar": MessageLookupByLibrary.simpleMessage("Calendar"),
         "chooseDateFormat":
             MessageLookupByLibrary.simpleMessage("Select the date format:"),
+        "chooseDateTime":
+            MessageLookupByLibrary.simpleMessage("Выберите дату и время:"),
         "chooseTheme": MessageLookupByLibrary.simpleMessage("Select themes"),
         "chooseYourLanguage":
             MessageLookupByLibrary.simpleMessage("Select a language:"),
@@ -46,21 +48,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateFormat": MessageLookupByLibrary.simpleMessage("Date format"),
         "daysShouldINotifyAboutTasks": MessageLookupByLibrary.simpleMessage(
             "How many days should notify about tasks?"),
+        "descriptionForTask": MessageLookupByLibrary.simpleMessage("Описание"),
         "emptyDayCalendar": MessageLookupByLibrary.simpleMessage(
             "There are no tasks on this day"),
         "emptyTasksList": MessageLookupByLibrary.simpleMessage(
-            "Add a task so you don\'t forget to congratulate"),
+            "You can add a task by clicking the \"+\" button below"),
         "enterNameInTextField":
             MessageLookupByLibrary.simpleMessage("Enter name"),
         "fillInTheRequiredFields":
             MessageLookupByLibrary.simpleMessage("Fill in the required fields"),
-        "hintTextNameInTextField": MessageLookupByLibrary.simpleMessage("Name"),
+        "hintTextNameInTextField":
+            MessageLookupByLibrary.simpleMessage("Title*"),
         "hopeMessageAppInInfo": MessageLookupByLibrary.simpleMessage(
             "We hope that our application will make your greetings more organized and memorable."),
         "info": MessageLookupByLibrary.simpleMessage("Info"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "lightThemeModeName":
             MessageLookupByLibrary.simpleMessage("Light theme"),
+        "month": MessageLookupByLibrary.simpleMessage("month"),
         "notification": MessageLookupByLibrary.simpleMessage("Notifications"),
         "notifyDayNInAdvanceAtHourNminuteN": m2,
         "purposeMessageAppInInfo": MessageLookupByLibrary.simpleMessage(
@@ -80,7 +85,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "This is a test notification. It\'s all right!"),
         "turnsN": m3,
+        "twoWeeks": MessageLookupByLibrary.simpleMessage("2 weeks"),
         "updateTask": MessageLookupByLibrary.simpleMessage("Update task"),
+        "week": MessageLookupByLibrary.simpleMessage("week"),
         "welcomeMessageInInfo": MessageLookupByLibrary.simpleMessage(
             "Welcome to our task reminder app!"),
         "youHaveNotEnteredARequiredField": MessageLookupByLibrary.simpleMessage(

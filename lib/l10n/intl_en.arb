@@ -20,11 +20,11 @@
   "hopeMessageAppInInfo": "We hope that our application will make your greetings more organized and memorable.",
   "chooseDateFormat": "Select the date format:",
   "emptyDayCalendar": "There are no tasks on this day",
-  "emptyTasksList": "Add a task so you don't forget to congratulate",
+  "emptyTasksList": "You can add a task by clicking the \"+\" button below",
   "tasksNotFound": "The task was not found",
   "search": "Search",
   "enterNameInTextField": "Enter name",
-  "hintTextNameInTextField": "Name",
+  "hintTextNameInTextField": "Title*",
   "addTask": "Add task",
   "addTaskButton": "Add task",
   "updateTask": "Update task",
@@ -35,5 +35,10 @@
   "thisIsATestNotificationItsAllRight": "This is a test notification. It's all right!",
   "tasks": "Tasks",
   "calendar": "Calendar",
-  "turnsN": "Turns {nextAge}"
+  "turnsN": "Turns {nextAge}",
+  "month": "month",
+  "twoWeeks": "2 weeks",
+  "week": "week",
+  "chooseDateTime": "Выберите дату и время:",
+  "descriptionForTask": "Описание"
 }

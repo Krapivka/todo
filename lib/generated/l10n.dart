@@ -260,10 +260,10 @@ class S {
     );
   }
 
-  /// `Add a task so you don't forget to congratulate`
+  /// `You can add a task by clicking the "+" button below`
   String get emptyTasksList {
     return Intl.message(
-      'Add a task so you don\'t forget to congratulate',
+      'You can add a task by clicking the "+" button below',
       name: 'emptyTasksList',
       desc: '',
       args: [],
@@ -300,10 +300,10 @@ class S {
     );
   }
 
-  /// `Name`
+  /// `Title*`
   String get hintTextNameInTextField {
     return Intl.message(
-      'Name',
+      'Title*',
       name: 'hintTextNameInTextField',
       desc: '',
       args: [],
@@ -418,6 +418,56 @@ class S {
       name: 'turnsN',
       desc: '',
       args: [nextAge],
+    );
+  }
+
+  /// `month`
+  String get month {
+    return Intl.message(
+      'month',
+      name: 'month',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2 weeks`
+  String get twoWeeks {
+    return Intl.message(
+      '2 weeks',
+      name: 'twoWeeks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `week`
+  String get week {
+    return Intl.message(
+      'week',
+      name: 'week',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выберите дату и время:`
+  String get chooseDateTime {
+    return Intl.message(
+      'Выберите дату и время:',
+      name: 'chooseDateTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Описание`
+  String get descriptionForTask {
+    return Intl.message(
+      'Описание',
+      name: 'descriptionForTask',
+      desc: '',
+      args: [],
     );
   }
 }

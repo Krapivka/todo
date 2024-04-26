@@ -2,6 +2,7 @@ import 'package:todo/core/data/models/task.dart';
 import 'package:todo/core/domain/repositories/task_repository.dart';
 import 'package:todo/core/services/ads/yandex_ads/banner/banner_ad.dart';
 import 'package:todo/core/utils/constants/Palette.dart';
+import 'package:todo/features/settings/bloc/bloc/settings_bloc.dart';
 import 'package:todo/features/todo_list/bloc/todo_list_bloc.dart';
 import 'package:todo/features/calendar/bloc/bloc/calendar_bloc.dart';
 import 'package:todo/features/calendar/widgets/task_tile.dart';
@@ -80,6 +81,11 @@ class _CalendarPageViewState extends State<CalendarPageView> {
                 firstDay: state.firstDay,
                 lastDay: state.lastDay,
                 focusedDay: _focusedDay,
+                availableCalendarFormats: {
+                  CalendarFormat.month: S.of(context).month,
+                  CalendarFormat.twoWeeks: S.of(context).twoWeeks,
+                  CalendarFormat.week: S.of(context).week
+                },
                 selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
                 calendarFormat: _calendarFormat,
                 rangeSelectionMode: _rangeSelectionMode,

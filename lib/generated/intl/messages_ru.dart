@@ -32,14 +32,15 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aboutApp": MessageLookupByLibrary.simpleMessage("О приложении"),
-        "addTask":
-            MessageLookupByLibrary.simpleMessage("Добавить день рождения"),
+        "addTask": MessageLookupByLibrary.simpleMessage("Добавить задачу"),
         "addTaskButton": MessageLookupByLibrary.simpleMessage("Создать"),
         "appVersionN": m0,
         "authorN": m1,
         "calendar": MessageLookupByLibrary.simpleMessage("Календарь"),
         "chooseDateFormat":
             MessageLookupByLibrary.simpleMessage("Выберите формат даты:"),
+        "chooseDateTime":
+            MessageLookupByLibrary.simpleMessage("Выберите дату и время:"),
         "chooseTheme": MessageLookupByLibrary.simpleMessage("Выбор темы"),
         "chooseYourLanguage":
             MessageLookupByLibrary.simpleMessage("Выберите язык:"),
@@ -47,22 +48,25 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Темная тема"),
         "dateFormat": MessageLookupByLibrary.simpleMessage("Формат даты"),
         "daysShouldINotifyAboutTasks": MessageLookupByLibrary.simpleMessage(
-            "За сколько дней уведомлять о днях рождения?"),
-        "emptyDayCalendar": MessageLookupByLibrary.simpleMessage(
-            "В этот день нет дней рождения"),
+            "За сколько дней уведомлять о задачах?"),
+        "descriptionForTask": MessageLookupByLibrary.simpleMessage("Описание"),
+        "emptyDayCalendar":
+            MessageLookupByLibrary.simpleMessage("В этот день нет задач"),
         "emptyTasksList": MessageLookupByLibrary.simpleMessage(
-            "Добавьте день рождения, чтобы не забыть поздравить"),
+            "Вы можете добавить задачу, нажав кнопку \"+\" ниже"),
         "enterNameInTextField":
-            MessageLookupByLibrary.simpleMessage("Введите имя"),
+            MessageLookupByLibrary.simpleMessage("Введите наименование"),
         "fillInTheRequiredFields":
             MessageLookupByLibrary.simpleMessage("Заполните обязательные поля"),
-        "hintTextNameInTextField": MessageLookupByLibrary.simpleMessage("Имя"),
+        "hintTextNameInTextField":
+            MessageLookupByLibrary.simpleMessage("Наименование*"),
         "hopeMessageAppInInfo": MessageLookupByLibrary.simpleMessage(
             "Мы надеемся, что наше приложение сделает ваши поздравления более организованными и запоминающимися."),
         "info": MessageLookupByLibrary.simpleMessage("Информация"),
         "language": MessageLookupByLibrary.simpleMessage("Язык"),
         "lightThemeModeName":
             MessageLookupByLibrary.simpleMessage("Светлая тема"),
+        "month": MessageLookupByLibrary.simpleMessage("месяц"),
         "notification": MessageLookupByLibrary.simpleMessage("Уведомления"),
         "notifyDayNInAdvanceAtHourNminuteN": m2,
         "purposeMessageAppInInfo": MessageLookupByLibrary.simpleMessage(
@@ -76,13 +80,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Системная тема"),
         "tasks": MessageLookupByLibrary.simpleMessage("Задачи"),
         "tasksNotFound":
-            MessageLookupByLibrary.simpleMessage("День рождения не найден"),
+            MessageLookupByLibrary.simpleMessage("Задача не найдена"),
         "theme": MessageLookupByLibrary.simpleMessage("Тема"),
         "thisIsATestNotificationItsAllRight":
             MessageLookupByLibrary.simpleMessage(
                 "Это тестовое уведомление. Всё работает!"),
         "turnsN": m3,
+        "twoWeeks": MessageLookupByLibrary.simpleMessage("2 недели"),
         "updateTask": MessageLookupByLibrary.simpleMessage("Обновить"),
+        "week": MessageLookupByLibrary.simpleMessage("неделя"),
         "welcomeMessageInInfo": MessageLookupByLibrary.simpleMessage(
             "Добро пожаловать в наше приложение напоминаний о днях рождения!"),
         "youHaveNotEnteredARequiredField": MessageLookupByLibrary.simpleMessage(
