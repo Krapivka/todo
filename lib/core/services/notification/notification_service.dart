@@ -126,12 +126,12 @@ class NotificationService {
         body: "",
         scheduleTime: notificationDateTimeInTask);
 
-    await showScheduleNotification(
-        id: id,
-        channelKey: "task_notification_nearby",
-        title: title,
-        body: "${task.description}",
-        scheduleTime: notificationDateTimeNearby);
+    // await showScheduleNotification(
+    //     id: id,
+    //     channelKey: "task_notification_nearby",
+    //     title: title,
+    //     body: "${task.description}",
+    //     scheduleTime: notificationDateTimeNearby);
   }
 
   static Future<void> showTestNotification(body) async {

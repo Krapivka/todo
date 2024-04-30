@@ -13,7 +13,7 @@ abstract class TaskLocalDataSource {
 }
 
 // ignore: constant_identifier_names
-const CACHED_TASKS_LIST = 'CACHED_TASK_LIST';
+const CACHED_TASKS_LIST = 'CACHED_TASK_LIST1';
 // ignore: constant_identifier_names
 const LAST_INDEX = 'LAST_INDEX';
 

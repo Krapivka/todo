@@ -8,7 +8,7 @@ ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   colorScheme: const ColorScheme.light(
     background: Palette.primaryLight,
-    primary: Palette.primaryLight,
+    primary: Palette.primary,
     secondary: Palette.secondaryLight,
   ),
   textSelectionTheme: const TextSelectionThemeData(
@@ -16,6 +16,7 @@ ThemeData lightTheme = ThemeData(
     selectionHandleColor: Palette.primaryAccent,
     selectionColor: Palette.primaryAccent,
   ),
+
   // appBarTheme: const AppBarTheme(
   //   color: Palette.primaryLight,
   // ),
@@ -36,7 +37,7 @@ ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   colorScheme: const ColorScheme.dark(
     background: Palette.primaryDark,
-    primary: Palette.primaryDark,
+    primary: Palette.primary,
     secondary: Palette.secondaryDark,
   ),
   textSelectionTheme: const TextSelectionThemeData(
@@ -47,9 +48,9 @@ ThemeData darkTheme = ThemeData(
   // appBarTheme: const AppBarTheme(
   //   color: Palette.primaryDark,
   // ),
-  // bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-  //   backgroundColor: Palette.primaryDark,
-  // ),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor: Palette.primaryDark,
+  ),
   appBarTheme: const AppBarTheme(backgroundColor: Palette.primaryDark),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Palette.primaryAccent),

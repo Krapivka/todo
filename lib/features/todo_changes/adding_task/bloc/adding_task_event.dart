@@ -16,6 +16,15 @@ class AddingTaskTitleChanged extends AddingTaskEvent {
   List<Object> get props => [title];
 }
 
+class AddingTaskDescriptionChanged extends AddingTaskEvent {
+  const AddingTaskDescriptionChanged(this.description);
+
+  final String description;
+
+  @override
+  List<Object> get props => [description];
+}
+
 // class AddingTaskImageTap extends AddingTaskEvent {
 //   const AddingTaskImageTap();
 

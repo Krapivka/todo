@@ -62,11 +62,11 @@ class UpdateTaskBloc extends Bloc<UpdateTaskEvent, UpdateTaskState> {
     try {
       if (state.title != '') {
         TaskModel task = TaskModel(
-          id: state.id,
-          description: state.description,
-          title: state.title,
-          dateTime: state.dateTime,
-        );
+            id: state.id,
+            description: state.description,
+            title: state.title,
+            dateTime: state.dateTime,
+            isCompleted: false);
 
         final updateTask = await _taskRepository.updateTask(task);
         updateTask.fold(

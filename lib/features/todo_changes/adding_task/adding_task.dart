@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/widgets.dart';
 import 'package:todo/core/domain/repositories/task_repository.dart';
 import 'package:todo/core/utils/constants/Palette.dart';
 import 'package:todo/core/utils/snack_bar/snack_bar.dart';
@@ -67,36 +68,42 @@ class AddingTaskView extends StatelessWidget {
                             .read<AddingTaskBloc>()
                             .add(AddingTaskTitleChanged(value));
                       },
-                      icon: const Icon(Icons.task),
+                      icon: const Icon(Icons.task_outlined),
                     ),
-                    SizedBox(
-                      height: 100,
-                      child: DatePicker(onDateTimeChanged: (DateTime value) {
-                        BlocProvider.of<AddingTaskBloc>(context)
-                            .add(AddingTaskDateTap(value));
-                      }),
+                    TextFieldTaskChanges(
+                      hintText: S.of(context).descriptionForTask,
+                      onChanged: (value) {
+                        context
+                            .read<AddingTaskBloc>()
+                            .add(AddingTaskDescriptionChanged(value));
+                      },
+                      icon: const Icon(Icons.description_outlined),
                     ),
-                    // _TextField(
-                    //   labelText: "Enter date",
-                    //   hintText: "Date",
-                    //   showCursor: false,
-                    //   controller: dataController,
-                    //   onTap: () async {
-                    //     final bloc = BlocProvider.of<AddingTaskBloc>(context);
-                    //     final birthdate = await showDatePicker(
-                    //         context: context,
-                    //         initialDate: DateTime.now(),
-                    //         firstDate: DateTime(1900),
-                    //         lastDate: DateTime.now());
+                    Column(
+                      children: [
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text(S.of(context).chooseDateTime),
+                            )),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        SizedBox(
+                          height: 100,
+                          child:
+                              DatePicker(onDateTimeChanged: (DateTime value) {
+                            BlocProvider.of<AddingTaskBloc>(context)
+                                .add(AddingTaskDateTap(value));
+                          }),
+                        ),
+                      ],
+                    ),
 
-                    //     if (birthdate != null) {
-                    //       bloc.add(AddingBirtdayDateTap(birthdate));
-                    //       dataController.text =
-                    //           birthdate.toString().split(' ')[0];
-                    //     }
-                    //   },
-                    //   icon: const Icon(Icons.date_range_outlined),
-                    // ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     const _ButtonAddTask(),
                   ],
                 ),
@@ -106,48 +113,6 @@ class AddingTaskView extends StatelessWidget {
     );
   }
 }
-
-// class EditableAvatar extends StatelessWidget {
-//   const EditableAvatar();
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final bloc = context.watch<AddingTaskBloc>();
-//     final width = MediaQuery.of(context).size.width / 3;
-//     // final avatarPath = bloc.state.file.absolute.path;
-//     return Center(
-//       child: Material(
-//         child: InkWell(
-//           borderRadius: BorderRadius.circular(100),
-//           onTap: () {
-//             bloc.add(const AddingBirtdayImageTap());
-//           },
-//           child: Ink(
-//             color: Theme.of(context).colorScheme.primary,
-//             child: Stack(children: [
-//               CircleAvatar(
-//                   radius: width / 1.3,
-//                   backgroundImage: avatarPath == '/'
-//                       ? const AssetImage("assets/images/avatar.png")
-//                       : FileImage(bloc.state.file) as ImageProvider),
-//               Positioned(
-//                 right: 0,
-//                 bottom: 0,
-//                 child: FloatingActionButton(
-//                   mini: true,
-//                   onPressed: () {
-//                     bloc.add(const AddingBirtdayImageTap());
-//                   },
-//                   child: const Icon(Icons.brush),
-//                 ),
-//               ),
-//             ]),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 class _ButtonAddTask extends StatelessWidget {
   const _ButtonAddTask({super.key});
@@ -160,14 +125,14 @@ class _ButtonAddTask extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(15),
           color: Palette.primaryAccent,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Text(
             S.of(context).addTaskButton,
-            style: const TextStyle(color: Palette.secondaryLight),
+            style: const TextStyle(color: Palette.primaryLight),
           ),
         ),
       ),
@@ -181,14 +146,29 @@ class DatePicker extends StatelessWidget {
   final void Function(DateTime) onDateTimeChanged;
   @override
   Widget build(BuildContext context) {
+    final dateTimeNow = DateTime.now();
     return BlocBuilder<AddingTaskBloc, AddingTaskState>(
       builder: (context, state) {
-        return CupertinoDatePicker(
-            minimumDate: DateTime(1930),
-            maximumDate: DateTime.now(),
-            mode: CupertinoDatePickerMode.date,
-            initialDateTime: state.dateTime,
-            onDateTimeChanged: onDateTimeChanged);
+        return Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: Palette.primaryDark,
+              width: 1,
+            ),
+          ),
+          child: CupertinoDatePicker(
+              minimumDate: DateTime(1930),
+              maximumDate: DateTime(
+                dateTimeNow.year + 20,
+                dateTimeNow.month,
+                dateTimeNow.day,
+              ),
+              mode: CupertinoDatePickerMode.dateAndTime,
+              use24hFormat: true,
+              initialDateTime: state.dateTime,
+              onDateTimeChanged: onDateTimeChanged),
+        );
       },
     );
   }

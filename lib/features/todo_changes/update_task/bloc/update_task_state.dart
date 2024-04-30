@@ -16,6 +16,7 @@ class UpdateTaskState extends Equatable {
     this.title = '',
     this.description = '',
     this.status = UpdateTaskStatus.initial,
+    this.isCompleted = false,
     dateTime,
   }) : dateTime = dateTime ?? DateTime.now();
 
@@ -24,6 +25,7 @@ class UpdateTaskState extends Equatable {
         dateTime = task.dateTime,
         status = UpdateTaskStatus.initial,
         description = task.description ?? '',
+        isCompleted = task.isCompleted,
         id = task.id;
 
   final UpdateTaskStatus status;
@@ -31,20 +33,24 @@ class UpdateTaskState extends Equatable {
   final String description;
   final String title;
   final DateTime dateTime;
+  final bool isCompleted;
   @override
-  List<Object> get props => [status, id, title, description, dateTime];
+  List<Object> get props =>
+      [status, id, title, description, dateTime, isCompleted];
 
   UpdateTaskState copyWith(
       {UpdateTaskStatus? status,
       int? id,
       String? title,
       String? description,
+      bool? isCompleted,
       DateTime? dateTime}) {
     return UpdateTaskState(
       id: id ?? this.id,
       description: description ?? this.description,
       status: status ?? this.status,
       title: title ?? this.title,
+      isCompleted: isCompleted ?? this.isCompleted,
       dateTime: dateTime ?? this.dateTime,
     );
   }

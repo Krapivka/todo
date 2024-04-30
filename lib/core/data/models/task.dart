@@ -11,6 +11,7 @@ class TaskModel extends TaskEntity {
     required super.title,
     super.description,
     required super.dateTime,
+    required super.isCompleted,
   });
 
   factory TaskModel.fromJson(Map<String, dynamic> json) =>

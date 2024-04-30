@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 class Palette {
   Palette._();
+
+  static const Color main = Color.fromARGB(255, 248, 246, 227);
+  static const Color primary = Color.fromARGB(143, 151, 231, 226);
   //light theme
   static const Color primaryLight = Color(0xffffffff);
   static const Color secondaryLight = Color.fromARGB(255, 151, 231, 225);

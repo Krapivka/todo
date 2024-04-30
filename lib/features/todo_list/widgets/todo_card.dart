@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:todo/core/data/models/task.dart';
 import 'package:todo/core/utils/animations/show_up.dart';
 import 'package:flutter/material.dart';
@@ -72,9 +73,10 @@ class _TaskCardState extends State<TaskCard> {
                     color: taskListBloc.state.selectedTaskId
                             .contains(widget.task.id)
                         ? const Color.fromARGB(255, 223, 223, 223)
-                        : Theme.of(context).colorScheme.secondary,
+                        : Theme.of(context).colorScheme.primary,
                   ),
                   child: ListTile(
+
                       // leading: CircleAvatar(
                       //   radius: 28,
                       //   backgroundImage: widget.task.filePath == "/"
@@ -92,35 +94,28 @@ class _TaskCardState extends State<TaskCard> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              // Text(S.of(context).turnsN(widget.task.turns)),
+                              Text(widget.task.description ?? ''),
                               Text(DateTimeUtils.formatDate(
                                   widget.task.dateTime,
                                   settingsBloc.state.dateFormat)),
                             ],
                           )),
-                      trailing: DateTimeUtils.getDifferenceCurrentDayTask(
-                                  widget.task.dateTime) !=
-                              '0'
-                          ? Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(width: 1),
-                              ),
-                              child: Center(
-                                  child: Text(
-                                DateTimeUtils.getDifferenceCurrentDayTask(
-                                    widget.task.dateTime),
-                                style: const TextStyle(fontSize: 12),
-                              )))
-                          : SizedBox(
-                              height: 40,
-                              width: 40,
-                              child: SvgPicture.asset(
-                                  'assets/images/confetti.svg',
-                                  semanticsLabel: 'Confetti'),
-                            )),
+                      trailing: IconButton(
+                          onPressed: () {
+                            taskListBloc.add(
+                                ChangeTaskCompleteListEvent(task: widget.task));
+                          },
+                          icon: FaIcon(
+                            widget.task.isCompleted
+                                ? FontAwesomeIcons.circleCheck
+                                : FontAwesomeIcons.circle,
+                            size: 25,
+                          ))
+
+                      // Icon(widget.task.isCompleted
+                      //     ? Icons.check_box_outlined
+                      //     : Icons.check_box_outline_blank_outlined)
+                      ),
                 ),
               ),
             ),

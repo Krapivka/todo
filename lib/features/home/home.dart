@@ -9,6 +9,8 @@ import 'package:todo/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../settings/data/repository/abstract_settings_repository.dart';
+
 @RoutePage()
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -19,7 +21,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) => TasksListBloc(
-            RepositoryProvider.of<AbstractTaskRepository>(context)),
+            RepositoryProvider.of<AbstractTaskRepository>(context),
+            RepositoryProvider.of<AbstractSettingsRepository>(context)),
         child: const HomeView());
   }
 }
@@ -39,8 +42,8 @@ class HomeView extends StatelessWidget {
                 AutoRouter.of(context).push(const SettingsRoute());
               },
               icon: const Icon(Icons.menu)),
-          title: const Text(
-            "Tasks",
+          title: Text(
+            S.of(context).tasks,
           ),
           centerTitle: true,
           actions: [
@@ -69,8 +72,8 @@ class HomeView extends StatelessWidget {
           },
           destinations: <Widget>[
             NavigationDestination(
-              selectedIcon: const Icon(Icons.home),
-              icon: const Icon(Icons.home_outlined),
+              selectedIcon: const Icon(Icons.task),
+              icon: const Icon(Icons.task_outlined),
               label: S.of(context).tasks,
             ),
             NavigationDestination(

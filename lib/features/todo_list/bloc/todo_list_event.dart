@@ -21,6 +21,13 @@ class DeleteTaskTasksListEvent extends TasksListEvent {
   List<Object?> get props => [];
 }
 
+class ChangeTaskCompleteListEvent extends TasksListEvent {
+  const ChangeTaskCompleteListEvent({required this.task});
+  final TaskModel task;
+  @override
+  List<Object?> get props => [];
+}
+
 class SearchTasksListEvent extends TasksListEvent {
   const SearchTasksListEvent({required this.query});
   final String query;

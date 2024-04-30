@@ -15,6 +15,7 @@ class AddingTaskBloc extends Bloc<AddingTaskEvent, AddingTaskState> {
   AddingTaskBloc(this._taskRepository, this._settingsRepository)
       : super(AddingTaskState()) {
     on<AddingTaskTitleChanged>(_onNameChanged);
+    on<AddingTaskDescriptionChanged>(_onDescriptionChanged);
     on<AddingTaskDateTap>(_onDateTap);
     // on<AddingTaskImageTap>(_onImageTap);
     on<AddingTaskSubmitted>(_onSubmitted);
@@ -33,8 +34,14 @@ class AddingTaskBloc extends Bloc<AddingTaskEvent, AddingTaskState> {
 
   void _onNameChanged(
       AddingTaskTitleChanged event, Emitter<AddingTaskState> emit) {
-    debugPrint("Name: ${event.title}");
+    debugPrint("Title: ${event.title}");
     emit(state.copyWith(title: event.title));
+  }
+
+  void _onDescriptionChanged(
+      AddingTaskDescriptionChanged event, Emitter<AddingTaskState> emit) {
+    debugPrint("Description: ${event.description}");
+    emit(state.copyWith(description: event.description));
   }
 
   void _onDateTap(AddingTaskDateTap event, Emitter<AddingTaskState> emit) {
@@ -55,6 +62,7 @@ class AddingTaskBloc extends Bloc<AddingTaskEvent, AddingTaskState> {
           description: state.description,
           title: state.title,
           dateTime: state.dateTime,
+          isCompleted: false,
         );
 
         //adding to the local storage

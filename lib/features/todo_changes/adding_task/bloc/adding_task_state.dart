@@ -16,14 +16,17 @@ class AddingTaskState extends Equatable {
   final String description;
   final String title;
   final DateTime dateTime;
+
   @override
   List<Object> get props => [status, title, description, dateTime];
 
-  AddingTaskState copyWith(
-      {AddingTaskStatus? status,
-      String? title,
-      String? description,
-      DateTime? dateTime}) {
+  AddingTaskState copyWith({
+    AddingTaskStatus? status,
+    String? title,
+    String? description,
+    DateTime? dateTime,
+    bool? isCompleted,
+  }) {
     return AddingTaskState(
       description: description ?? this.description,
       status: status ?? this.status,

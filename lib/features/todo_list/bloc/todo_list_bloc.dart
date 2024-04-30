@@ -6,12 +6,15 @@ import 'package:todo/core/domain/repositories/task_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo/core/services/notification/notification_service.dart';
+
+import '../../settings/data/repository/abstract_settings_repository.dart';
 
 part 'todo_list_event.dart';
 part 'todo_list_state.dart';
 
 class TasksListBloc extends Bloc<TasksListEvent, TasksListState> {
-  TasksListBloc(this._taskRepository)
+  TasksListBloc(this._taskRepository, this._settingsRepository)
       : super(
           const TasksListState(
             taskListStatus: TasksListStatus.initial,
@@ -25,8 +28,10 @@ class TasksListBloc extends Bloc<TasksListEvent, TasksListState> {
     on<LongPressTaskCardEvent>(_onLongPressTaskCardEvent);
     on<TapTaskCardEvent>(_onTapTaskCardEvent);
     on<DeleteTaskTasksListEvent>(_onDeleteTask);
+    on<ChangeTaskCompleteListEvent>(_onChangeTaskComplete);
   }
   final AbstractTaskRepository _taskRepository;
+  final AbstractSettingsRepository _settingsRepository;
 
   _onLoadTasksList(
       LoadTasksListEvent event, Emitter<TasksListState> emit) async {
@@ -115,6 +120,45 @@ class TasksListBloc extends Bloc<TasksListEvent, TasksListState> {
         selectedTaskId: [],
         taskListStatus: TasksListStatus.selectedTasksDeleted));
     add(const LoadTasksListEvent());
+  }
+
+  _onChangeTaskComplete(
+      ChangeTaskCompleteListEvent event, Emitter<TasksListState> emit) async {
+    TaskModel task = TaskModel(
+      id: event.task.id,
+      description: event.task.description,
+      title: event.task.title,
+      dateTime: event.task.dateTime,
+      isCompleted: !event.task.isCompleted,
+    );
+    final updateTask = await _taskRepository.updateTask(task);
+    updateTask.fold(
+        (failure) =>
+            emit(state.copyWith(taskListStatus: TasksListStatus.failure)),
+        (result) async {
+      //cancel notification
+      if (task.isCompleted) {
+        await AwesomeNotifications().cancel(task.id);
+      } else {
+        //scheduling notification
+        final notificationInterval =
+            await _settingsRepository.getNotificationDayTime();
+        notificationInterval.fold(
+            (failure) =>
+                emit(state.copyWith(taskListStatus: TasksListStatus.failure)),
+            (result) async {
+          final taskTime = event.task.dateTime;
+          await NotificationService.scheduleTaskNotification(
+              task: task,
+              id: task.id,
+              interval: result.day,
+              dateTime: taskTime,
+              hourNotif: result.hour,
+              minuteNotif: result.minute);
+        });
+      }
+      add(const LoadTasksListEvent());
+    });
   }
 }
 
