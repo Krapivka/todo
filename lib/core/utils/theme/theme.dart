@@ -7,8 +7,8 @@ ThemeData lightTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.light,
   colorScheme: const ColorScheme.light(
-    background: Palette.primaryLight,
-    primary: Palette.primary,
+    background: Palette.backgroundLight,
+    primary: Palette.primaryLight,
     secondary: Palette.secondaryLight,
   ),
   textSelectionTheme: const TextSelectionThemeData(
@@ -16,7 +16,7 @@ ThemeData lightTheme = ThemeData(
     selectionHandleColor: Palette.primaryAccent,
     selectionColor: Palette.primaryAccent,
   ),
-
+  scaffoldBackgroundColor: Palette.backgroundLight,
   // appBarTheme: const AppBarTheme(
   //   color: Palette.primaryLight,
   // ),
@@ -37,7 +37,7 @@ ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   colorScheme: const ColorScheme.dark(
     background: Palette.primaryDark,
-    primary: Palette.primary,
+    primary: Palette.primaryDark,
     secondary: Palette.secondaryDark,
   ),
   textSelectionTheme: const TextSelectionThemeData(

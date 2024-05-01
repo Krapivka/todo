@@ -52,8 +52,10 @@ class _TaskCardState extends State<TaskCard> {
           opacity: _visible ? 1 : 0,
           duration: const Duration(milliseconds: 200),
           child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 8),
+            margin: const EdgeInsets.symmetric(vertical: 3, horizontal: 8),
             child: Material(
+              elevation: 2,
+              borderRadius: BorderRadius.circular(20),
               child: InkWell(
                 borderRadius: BorderRadius.circular(20),
                 onTap: () {
@@ -85,8 +87,12 @@ class _TaskCardState extends State<TaskCard> {
                       // ),
                       title: ShowUp(
                         delay: 100,
-                        child: Text(widget.task.title,
-                            maxLines: 1, overflow: TextOverflow.ellipsis),
+                        child: Text(
+                          widget.task.title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          // style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                       subtitle: ShowUp(
                           delay: 300,
@@ -101,21 +107,17 @@ class _TaskCardState extends State<TaskCard> {
                             ],
                           )),
                       trailing: IconButton(
-                          onPressed: () {
-                            taskListBloc.add(
-                                ChangeTaskCompleteListEvent(task: widget.task));
-                          },
-                          icon: FaIcon(
-                            widget.task.isCompleted
-                                ? FontAwesomeIcons.circleCheck
-                                : FontAwesomeIcons.circle,
-                            size: 25,
-                          ))
-
-                      // Icon(widget.task.isCompleted
-                      //     ? Icons.check_box_outlined
-                      //     : Icons.check_box_outline_blank_outlined)
-                      ),
+                        onPressed: () {
+                          taskListBloc.add(
+                              ChangeTaskCompleteListEvent(task: widget.task));
+                        },
+                        icon: widget.task.isCompleted
+                            ? const FaIcon(FontAwesomeIcons.solidCircleCheck,
+                                size: 25,
+                                color: Color.fromARGB(255, 58, 230, 149))
+                            : const FaIcon(FontAwesomeIcons.circle,
+                                size: 25, color: Colors.redAccent),
+                      )),
                 ),
               ),
             ),

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
 import 'package:todo/core/domain/repositories/task_repository.dart';
+import 'package:todo/core/utils/components/actionButton.dart';
 import 'package:todo/core/utils/constants/Palette.dart';
 import 'package:todo/core/utils/snack_bar/snack_bar.dart';
 import 'package:todo/features/todo_changes/adding_task/bloc/adding_task_bloc.dart';
@@ -87,7 +88,7 @@ class AddingTaskView extends StatelessWidget {
                               padding: const EdgeInsets.only(left: 8.0),
                               child: Text(S.of(context).chooseDateTime),
                             )),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         SizedBox(
@@ -120,23 +121,12 @@ class _ButtonAddTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        context.read<AddingTaskBloc>().add(const AddingTaskSubmitted());
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: Palette.primaryAccent,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Text(
-            S.of(context).addTaskButton,
-            style: const TextStyle(color: Palette.primaryLight),
-          ),
-        ),
-      ),
-    );
+        onTap: () {
+          context.read<AddingTaskBloc>().add(const AddingTaskSubmitted());
+        },
+        child: ActionButton(
+          text: S.of(context).addTaskButton,
+        ));
   }
 }
 

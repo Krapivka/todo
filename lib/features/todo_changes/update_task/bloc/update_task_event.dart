@@ -32,6 +32,15 @@ class UpdateTaskDateTap extends UpdateTaskEvent {
   List<Object> get props => [birthdate];
 }
 
+class UpdateTaskDescriptionChanged extends UpdateTaskEvent {
+  const UpdateTaskDescriptionChanged(this.description);
+
+  final String description;
+
+  @override
+  List<Object> get props => [description];
+}
+
 class UpdateTaskDelete extends UpdateTaskEvent {
   const UpdateTaskDelete(this.id);
 

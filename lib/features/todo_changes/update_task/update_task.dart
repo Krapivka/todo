@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:todo/core/data/models/task.dart';
 
 import 'package:todo/core/domain/repositories/task_repository.dart';
+import 'package:todo/core/utils/components/actionButton.dart';
 import 'package:todo/core/utils/constants/Palette.dart';
 import 'package:todo/core/utils/snack_bar/snack_bar.dart';
 import 'package:todo/features/todo_changes/widgets/text_field_todo_changes.dart';
@@ -39,14 +40,16 @@ class UpdateTaskPageView extends StatelessWidget {
   UpdateTaskPageView({
     super.key,
   });
-  TextEditingController nameController = TextEditingController();
-  TextEditingController dataController = TextEditingController();
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+  // TextEditingController dataController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final bloc = BlocProvider.of<UpdateTaskBloc>(context).state;
-    nameController.text = bloc.title;
-    dataController.text = bloc.dateTime.toString().split(' ')[0];
+    titleController.text = bloc.title;
+    descriptionController.text = bloc.description;
+    // dataController.text = bloc.dateTime.toString().split(' ')[0];
     return BlocConsumer<UpdateTaskBloc, UpdateTaskState>(
         listener: (context, state) {
       if (state.status == UpdateTaskStatus.validatorFailure) {
@@ -59,72 +62,76 @@ class UpdateTaskPageView extends StatelessWidget {
       }
     }, builder: (context, state) {
       return Scaffold(
-          appBar: AppBar(
-            title: Text(
-              S.of(context).updateTask,
-            ),
-            centerTitle: true,
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    context
-                        .read<UpdateTaskBloc>()
-                        .add(UpdateTaskDelete(state.id));
-                  },
-                  icon: const Icon(Icons.delete_outline_outlined))
-            ],
+        appBar: AppBar(
+          title: Text(
+            S.of(context).updateTask,
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SingleChildScrollView(
-              child: Column(
+          centerTitle: true,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  context
+                      .read<UpdateTaskBloc>()
+                      .add(UpdateTaskDelete(state.id));
+                },
+                icon: const Icon(Icons.delete_outline_outlined))
+          ],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              //  const EditableAvatar(),
+              TextFieldTaskChanges(
+                controller: titleController,
+                labelText: S.of(context).enterNameInTextField,
+                hintText: S.of(context).hintTextNameInTextField,
+                onChanged: (value) {
+                  context
+                      .read<UpdateTaskBloc>()
+                      .add(UpdateTaskTitleChanged(value));
+                },
+                icon: const Icon(Icons.task_outlined),
+              ),
+              TextFieldTaskChanges(
+                controller: descriptionController,
+                hintText: S.of(context).descriptionForTask,
+                onChanged: (value) {
+                  context
+                      .read<UpdateTaskBloc>()
+                      .add(UpdateTaskDescriptionChanged(value));
+                },
+                icon: const Icon(Icons.description_outlined),
+              ),
+              Column(
                 children: [
-                  // const EditableImage(),
-                  TextFieldTaskChanges(
-                    labelText: S.of(context).enterNameInTextField,
-                    hintText: S.of(context).hintTextNameInTextField,
-                    onChanged: (value) {
-                      context
-                          .read<UpdateTaskBloc>()
-                          .add(UpdateTaskTitleChanged(value));
-                    },
-                    controller: nameController,
-                    icon: const Icon(Icons.task),
+                  Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Text(S.of(context).chooseDateTime),
+                      )),
+                  const SizedBox(
+                    height: 5,
                   ),
-                  // _TextField(
-                  //   labelText: "Enter date",
-                  //   hintText: "Date",
-                  //   showCursor: false,
-                  //   controller: dataController,
-                  //   onTap: () async {
-                  //     final bloc = BlocProvider.of<UpdateTaskBloc>(context);
-                  //     final birthdate = await showDatePicker(
-                  //         context: context,
-                  //         initialDate: DateTime.now(),
-                  //         firstDate: DateTime(1930),
-                  //         lastDate: DateTime.now());
-
-                  //     if (birthdate != null) {
-                  //       bloc.add(UpdateTaskDateTap(birthdate));
-                  //       dataController.text = birthdate.toString().split(' ')[0];
-                  //     }
-                  //   },
-                  //   icon: const Icon(Icons.date_range_outlined),
-                  // ),
                   SizedBox(
                     height: 100,
-                    child: DatePicker(
-                      onDateTimeChanged: (DateTime value) {
-                        BlocProvider.of<UpdateTaskBloc>(context)
-                            .add(UpdateTaskDateTap(value));
-                      },
-                    ),
+                    child: DatePicker(onDateTimeChanged: (DateTime value) {
+                      BlocProvider.of<UpdateTaskBloc>(context)
+                          .add(UpdateTaskDateTap(value));
+                    }),
                   ),
-                  const _ButtonSaveTask(),
                 ],
               ),
-            ),
-          ));
+
+              const SizedBox(
+                height: 10,
+              ),
+              const _ButtonSaveTask(),
+            ],
+          ),
+        ),
+      );
     });
   }
 }
@@ -176,28 +183,17 @@ class UpdateTaskPageView extends StatelessWidget {
 // }
 
 class _ButtonSaveTask extends StatelessWidget {
-  const _ButtonSaveTask();
+  const _ButtonSaveTask({super.key});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        context.read<UpdateTaskBloc>().add(const UpdateTaskSave());
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Palette.primaryAccent,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Text(
-            S.of(context).updateTask,
-            style: const TextStyle(color: Palette.secondaryLight),
-          ),
-        ),
-      ),
-    );
+        onTap: () {
+          context.read<UpdateTaskBloc>().add(const UpdateTaskSave());
+        },
+        child: ActionButton(
+          text: S.of(context).save,
+        ));
   }
 }
 
@@ -207,14 +203,29 @@ class DatePicker extends StatelessWidget {
   final void Function(DateTime) onDateTimeChanged;
   @override
   Widget build(BuildContext context) {
+    final dateTimeNow = DateTime.now();
     return BlocBuilder<UpdateTaskBloc, UpdateTaskState>(
       builder: (context, state) {
-        return CupertinoDatePicker(
-            minimumDate: DateTime(1930),
-            maximumDate: DateTime(2100),
-            mode: CupertinoDatePickerMode.date,
-            initialDateTime: state.dateTime,
-            onDateTimeChanged: onDateTimeChanged);
+        return Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: Palette.primaryDark,
+              width: 1,
+            ),
+          ),
+          child: CupertinoDatePicker(
+              minimumDate: DateTime(1930),
+              maximumDate: DateTime(
+                dateTimeNow.year + 20,
+                dateTimeNow.month,
+                dateTimeNow.day,
+              ),
+              mode: CupertinoDatePickerMode.dateAndTime,
+              use24hFormat: true,
+              initialDateTime: state.dateTime,
+              onDateTimeChanged: onDateTimeChanged),
+        );
       },
     );
   }

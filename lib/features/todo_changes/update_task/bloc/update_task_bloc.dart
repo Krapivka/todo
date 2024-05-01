@@ -16,7 +16,7 @@ class UpdateTaskBloc extends Bloc<UpdateTaskEvent, UpdateTaskState> {
     on<UpdateTaskDelete>(_onDeleteTap);
     on<UpdateTaskTitleChanged>(_onNameChanged);
     on<UpdateTaskDateTap>(_onDateTap);
-    // on<UpdateTaskImageTap>(_onImageTap);
+    on<UpdateTaskDescriptionChanged>(_onDescriptionChanged);
     on<UpdateTaskSave>(_onSave);
   }
 
@@ -33,6 +33,12 @@ class UpdateTaskBloc extends Bloc<UpdateTaskEvent, UpdateTaskState> {
       UpdateTaskTitleChanged event, Emitter<UpdateTaskState> emit) {
     debugPrint("Name: ${event.title}");
     emit(state.copyWith(title: event.title));
+  }
+
+  void _onDescriptionChanged(
+      UpdateTaskDescriptionChanged event, Emitter<UpdateTaskState> emit) {
+    debugPrint("Description: ${event.description}");
+    emit(state.copyWith(description: event.description));
   }
 
   void _onDeleteTap(
