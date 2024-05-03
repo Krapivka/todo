@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:todo/core/utils/date_utils/date_utils.dart';
 import 'package:todo/features/settings/bloc/bloc/settings_bloc.dart';
 import 'package:todo/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -24,12 +25,10 @@ class DateFormatSelectionPage extends StatelessWidget {
               style: const TextStyle(fontSize: 18),
             ),
             const SizedBox(height: 20),
-            const DateFormatOption(
-              dateFormat: 'dd/MM/yyyy',
-            ),
-            const DateFormatOption(
-              dateFormat: 'MM/dd/yyyy',
-            ),
+            for (String i in DateTimeUtils.dateFormatList)
+              DateFormatOption(
+                dateFormat: i,
+              )
           ],
         ),
       ),

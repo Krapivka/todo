@@ -6,7 +6,8 @@ enum TasksListStatus {
   loaded,
   searchLoaded,
   failure,
-  selectedTasksDeleted
+  selectedTasksDeleted,
+  changedCheck,
 }
 
 class TasksListState {

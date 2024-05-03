@@ -1,3 +1,4 @@
+import 'package:todo/core/utils/date_utils/date_utils.dart';
 import 'package:todo/features/settings/data/models/day_time_notification.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -66,7 +67,7 @@ class SettingsLocalDataSource extends AbstractSettingsLocalDataSource {
   @override
   Future<String> getDateFormatFromCache() async {
     return sharedPreferences.getString(keyDateFormat) ??
-        'dd/MM/yyyy'; // Значение по умолчанию - 'dd/MM/yyyy'
+        DateTimeUtils.defaultDateFormat;
   }
 
   @override

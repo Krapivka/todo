@@ -2,14 +2,14 @@ import 'package:todo/core/data/models/task.dart';
 import 'package:todo/core/domain/repositories/task_repository.dart';
 import 'package:todo/core/services/ads/yandex_ads/banner/banner_ad.dart';
 import 'package:todo/core/utils/constants/Palette.dart';
-import 'package:todo/features/settings/bloc/bloc/settings_bloc.dart';
 import 'package:todo/features/todo_list/bloc/todo_list_bloc.dart';
 import 'package:todo/features/calendar/bloc/bloc/calendar_bloc.dart';
-import 'package:todo/features/calendar/widgets/task_tile.dart';
 import 'package:todo/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+import '../../core/utils/components/todo_card.dart';
 
 class CalendarPage extends StatelessWidget {
   const CalendarPage({super.key});
@@ -62,7 +62,7 @@ class _CalendarPageViewState extends State<CalendarPageView> {
   Widget build(BuildContext context) {
     return BlocListener<TasksListBloc, TasksListState>(
       listener: (context, state) {
-        if (state.taskListStatus == TasksListStatus.selectedTasksDeleted) {
+        if (state.taskListStatus == TasksListStatus.loaded) {
           BlocProvider.of<CalendarBloc>(context).add(const LoadTasksCalendar());
           BlocProvider.of<CalendarBloc>(context)
               .add(CalendarDateTap(_focusedDay));
@@ -95,7 +95,7 @@ class _CalendarPageViewState extends State<CalendarPageView> {
                 startingDayOfWeek: StartingDayOfWeek.monday,
                 calendarStyle: const CalendarStyle(
                     markerDecoration: BoxDecoration(
-                        color: Palette.secondaryAccent, shape: BoxShape.circle),
+                        color: Palette.markerColor, shape: BoxShape.circle),
                     outsideDaysVisible: false,
                     selectedDecoration: BoxDecoration(
                         color: Palette.primaryAccent, shape: BoxShape.circle),
@@ -126,7 +126,7 @@ class _CalendarPageViewState extends State<CalendarPageView> {
                     return ListView.builder(
                       shrinkWrap: true,
                       itemCount: state.tasksInSelectedDay.length,
-                      itemBuilder: (context, index) => TaskTile(
+                      itemBuilder: (context, index) => TaskCard(
                           index: index, task: state.tasksInSelectedDay[index]),
                     );
                   },

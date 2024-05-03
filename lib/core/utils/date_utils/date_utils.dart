@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 
 class DateTimeUtils {
+  DateTimeUtils._();
   static String formatDate(DateTime dateTime, String dateFormat) {
     final DateFormat formatter = DateFormat(dateFormat);
     final date = formatter.format(dateTime);
@@ -36,13 +37,14 @@ class DateTimeUtils {
     return formattedDate;
   }
 
-  static int calculateAge(DateTime birthDate) {
-    final now = DateTime.now();
-    int age = now.year - birthDate.year;
-    if (now.month < birthDate.month ||
-        (now.month == birthDate.month && now.day < birthDate.day)) {
-      age--;
-    }
-    return age;
-  }
+  static String get defaultDateFormat => 'dd/MM/yyyy HH:mm';
+
+  static List<String> get dateFormatList => [
+        'dd/MM/yyyy HH:mm',
+        'dd-MM-yyyy HH:mm',
+        'dd.MM.yyyy HH:mm',
+        'MM/dd/yyyy HH:mm',
+        'MM-dd-yyyy HH:mm',
+        'MM.dd.yyyy HH:mm',
+      ];
 }

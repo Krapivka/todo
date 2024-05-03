@@ -10,12 +10,15 @@ class Palette {
   static const Color textLight = Color.fromARGB(255, 53, 53, 53);
 
   //dark theme
-  static const Color backgroundDark = Color.fromARGB(255, 37, 37, 37);
+  static const Color backgroundDark = Color.fromARGB(255, 14, 14, 14);
   static const Color primaryDark = Color.fromARGB(255, 46, 46, 46);
   static const Color secondaryDark = Color.fromARGB(255, 122, 162, 227);
   static const Color textDark = Color.fromARGB(255, 247, 247, 247);
 
-  //calendar
+  //accent
   static const Color primaryAccent = Color.fromARGB(255, 122, 162, 227);
   static const Color secondaryAccent = Color.fromARGB(255, 106, 212, 221);
+
+  //calendar
+  static const Color markerColor = Color.fromARGB(255, 144, 177, 230);
 }

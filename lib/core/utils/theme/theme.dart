@@ -36,7 +36,7 @@ ThemeData darkTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.dark,
   colorScheme: const ColorScheme.dark(
-    background: Palette.primaryDark,
+    background: Palette.backgroundDark,
     primary: Palette.primaryDark,
     secondary: Palette.secondaryDark,
   ),
@@ -51,7 +51,7 @@ ThemeData darkTheme = ThemeData(
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
     backgroundColor: Palette.primaryDark,
   ),
-  appBarTheme: const AppBarTheme(backgroundColor: Palette.primaryDark),
+  appBarTheme: const AppBarTheme(backgroundColor: Palette.backgroundDark),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Palette.primaryAccent),
   fontFamily: _fontFamily,

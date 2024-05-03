@@ -1,7 +1,7 @@
 import 'package:todo/core/data/models/task.dart';
 import 'package:todo/core/services/ads/yandex_ads/banner/banner_ad.dart';
 import 'package:todo/features/todo_list/bloc/todo_list_bloc.dart';
-import 'package:todo/features/todo_list/widgets/todo_card.dart';
+import 'package:todo/core/utils/components/todo_card.dart';
 import 'package:todo/features/todo_list/widgets/todo_search.dart';
 import 'package:todo/generated/l10n.dart';
 

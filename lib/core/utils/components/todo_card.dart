@@ -4,7 +4,6 @@ import 'package:todo/core/data/models/task.dart';
 import 'package:todo/core/utils/animations/show_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 
 import 'package:todo/core/utils/date_utils/date_utils.dart';
 import 'package:todo/features/todo_list/bloc/todo_list_bloc.dart';
