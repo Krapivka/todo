@@ -22,19 +22,19 @@ class NotificationService {
         playSound: true,
         criticalAlerts: true,
       ),
-      NotificationChannel(
-        channelGroupKey: "high_importance_channel_group",
-        channelKey: "task_notification_nearby",
-        channelName: "Task notification nearby",
-        channelDescription: "This channel notification users about nearby task",
-        defaultColor: const Color.fromARGB(255, 192, 125, 166),
-        ledColor: Colors.white,
-        importance: NotificationImportance.Max,
-        channelShowBadge: true,
-        onlyAlertOnce: true,
-        playSound: true,
-        criticalAlerts: true,
-      ),
+      // NotificationChannel(
+      //   channelGroupKey: "high_importance_channel_group",
+      //   channelKey: "task_notification_nearby",
+      //   channelName: "Task notification nearby",
+      //   channelDescription: "This channel notification users about nearby task",
+      //   defaultColor: const Color.fromARGB(255, 192, 125, 166),
+      //   ledColor: Colors.white,
+      //   importance: NotificationImportance.Max,
+      //   channelShowBadge: true,
+      //   onlyAlertOnce: true,
+      //   playSound: true,
+      //   criticalAlerts: true,
+      // ),
       NotificationChannel(
         channelGroupKey: "high_importance_channel_group",
         channelKey: "task_notification_test",
@@ -105,37 +105,26 @@ class NotificationService {
   static Future<void> scheduleTaskNotification({
     required int id,
     required TaskEntity task,
-    required int interval,
     required DateTime dateTime,
     required int hourNotif,
     required int minuteNotif,
   }) async {
     final String title = task.title;
+    final String description = task.description ?? "";
 
-    DateTime notificationDateTimeNearby = DateTime(
-            dateTime.year, dateTime.month, dateTime.day, hourNotif, minuteNotif)
-        .subtract(Duration(days: interval));
-
-    DateTime notificationDateTimeInTask = DateTime(
-        dateTime.year, dateTime.month, dateTime.day, hourNotif, minuteNotif);
+    DateTime notificationDateTimeInTask =
+        dateTime.subtract(Duration(hours: hourNotif, minutes: minuteNotif));
 
     await showScheduleNotification(
-        id: -id,
+        id: id,
         channelKey: "task_notification_in_day",
         title: title,
-        body: "",
+        body: description,
         scheduleTime: notificationDateTimeInTask);
-
-    // await showScheduleNotification(
-    //     id: id,
-    //     channelKey: "task_notification_nearby",
-    //     title: title,
-    //     body: "${task.description}",
-    //     scheduleTime: notificationDateTimeNearby);
   }
 
   static Future<void> showTestNotification(body) async {
-    const String title = "Memo birthay";
+    const String title = "Task Calendar";
     await showNotification(title: title, body: body);
   }
 

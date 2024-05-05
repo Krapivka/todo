@@ -8,7 +8,7 @@ class SettingsModel extends Equatable {
       required this.language,
       required this.dateFormat,
       required this.theme});
-  final DayTimeNotification dayTimeNotification;
+  final TimeNotification dayTimeNotification;
   final String language;
   final String dateFormat;
   final AppThemeMode theme;

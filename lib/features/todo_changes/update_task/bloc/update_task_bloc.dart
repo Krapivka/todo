@@ -22,12 +22,6 @@ class UpdateTaskBloc extends Bloc<UpdateTaskEvent, UpdateTaskState> {
 
   final AbstractTaskRepository _taskRepository;
   final AbstractSettingsRepository _settingsRepository;
-  // void _onImageTap(
-  //     UpdateTaskImageTap event, Emitter<UpdateTaskState> emit) async {
-  //   final File? file = await AppImagePickerService.getImageFromGallery();
-
-  //   emit(state.copyWith(file: file));
-  // }
 
   void _onNameChanged(
       UpdateTaskTitleChanged event, Emitter<UpdateTaskState> emit) {
@@ -79,7 +73,8 @@ class UpdateTaskBloc extends Bloc<UpdateTaskEvent, UpdateTaskState> {
             (failure) => emit(state.copyWith(status: UpdateTaskStatus.failure)),
             (result) async {
           //cancel notification
-          await AwesomeNotifications().cancel(task.id);
+          await AwesomeNotifications().cancel(task.id).then((value) =>
+              debugPrint("Notification with ID ${task.id} canceled"));
           //scheduling notification
           final notificationInterval =
               await _settingsRepository.getNotificationDayTime();
@@ -91,7 +86,6 @@ class UpdateTaskBloc extends Bloc<UpdateTaskEvent, UpdateTaskState> {
             await NotificationService.scheduleTaskNotification(
                 task: task,
                 id: task.id,
-                interval: result.day,
                 dateTime: taskTime,
                 hourNotif: result.hour,
                 minuteNotif: result.minute);

@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:todo/core/utils/date_utils/date_utils.dart';
 import 'package:todo/features/settings/bloc/bloc/settings_bloc.dart';
 import 'package:todo/generated/l10n.dart';
 import 'package:todo/router/router.dart';
@@ -32,12 +33,11 @@ class SettingsPageView extends StatelessWidget {
               ListTile(
                 leading: const Icon(Icons.notifications_on_outlined),
                 title: Text(S.of(context).notification),
-                subtitle: Text(S.of(context).notifyDayNInAdvanceAtHourNminuteN(
-                    state.dayTimeNotification.day,
-                    state.dayTimeNotification.hour,
-                    state.dayTimeNotification.minute == 0
-                        ? "00"
-                        : state.dayTimeNotification.minute)),
+                subtitle: Text(S.of(context).notifyInDatetimeNHoursminutes(
+                    DateTimeUtils.formatDate(
+                        DateTime(0, 0, 0, state.dayTimeNotification.hour,
+                            state.dayTimeNotification.minute),
+                        "HH:mm"))),
                 onTap: () {
                   AutoRouter.of(context)
                       .push(const SettingsNotificationRoute());

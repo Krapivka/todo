@@ -6,14 +6,14 @@ class SettingsState extends Equatable {
   ///Field [dayTimeNotification] shows how many days are left before the task notification
   ///and time notification
   SettingsState({dayTimeNotification, status, language, dateFormat, theme})
-      : dayTimeNotification = dayTimeNotification ??
-            DayTimeNotification(day: 0, hour: 0, minute: 0),
+      : dayTimeNotification =
+            dayTimeNotification ?? TimeNotification(hour: 0, minute: 0),
         status = status ?? SettingsStatus.initial,
         language = language ?? '',
         dateFormat = dateFormat ?? '',
         theme = theme ?? AppThemeMode.system;
 
-  final DayTimeNotification dayTimeNotification;
+  final TimeNotification dayTimeNotification;
   final SettingsStatus status;
   final String language;
   final String dateFormat;
@@ -23,7 +23,7 @@ class SettingsState extends Equatable {
       [dayTimeNotification, status, language, dateFormat, theme];
 
   SettingsState copyWith({
-    DayTimeNotification? dayTimeNotification,
+    TimeNotification? dayTimeNotification,
     String? language,
     String? dateFormat,
     AppThemeMode? theme,

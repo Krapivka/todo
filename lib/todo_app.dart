@@ -18,7 +18,7 @@ class App extends StatelessWidget {
   final AbstractSettingsRepository settingsRepository;
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
-  static const String name = 'Awesome Notifications - Example App';
+  static const String name = 'Task Calendar';
   static const Color mainColor = Colors.deepPurple;
 
   const App(
@@ -87,7 +87,7 @@ class _AppViewState extends State<AppView> {
           supportedLocales: S.delegate.supportedLocales,
           locale: Locale(state.language),
           debugShowCheckedModeBanner: false,
-          title: 'To Do',
+          title: 'Task Calendar',
           theme: lightTheme,
           darkTheme: darkTheme,
           themeMode: state.theme.themeMode,

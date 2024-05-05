@@ -31,7 +31,7 @@ class SettingsRepository implements AbstractSettingsRepository {
   }
 
   @override
-  Future<Either<Failure, DayTimeNotification>> getNotificationDayTime() async {
+  Future<Either<Failure, TimeNotification>> getNotificationDayTime() async {
     try {
       final notificationDay =
           await localDataSource.getNotificationDayTimeNotificationFromCache();
@@ -71,7 +71,7 @@ class SettingsRepository implements AbstractSettingsRepository {
 
   @override
   Future<Either<Failure, void>> setNotificationDayTime(
-      DayTimeNotification dayTime) async {
+      TimeNotification dayTime) async {
     try {
       return Right(await localDataSource
           .notificationDayTimeNotificationToCache(dayTime));
@@ -93,8 +93,7 @@ class SettingsRepository implements AbstractSettingsRepository {
   Future<Either<Failure, SettingsModel>> getSettingsData() async {
     String dateFormat = '';
     String language = '';
-    DayTimeNotification dayTimeNotification =
-        DayTimeNotification(day: 0, hour: 0, minute: 0);
+    TimeNotification dayTimeNotification = TimeNotification(hour: 0, minute: 0);
     AppThemeMode theme = AppThemeMode.system;
     try {
       (await getDateFormat())

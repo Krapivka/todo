@@ -25,9 +25,8 @@ class SettingsNotificationPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DayTimeNotification dayTimeNotification =
+    TimeNotification dayTimeNotification =
         BlocProvider.of<SettingsBloc>(context).state.dayTimeNotification;
-    int notificationDay = dayTimeNotification.day;
     int notificationHour = dayTimeNotification.hour;
     int notificationMinute = dayTimeNotification.minute;
     return Scaffold(
@@ -59,8 +58,8 @@ class SettingsNotificationPageView extends StatelessWidget {
               height: 180,
               child: CupertinoDatePicker(
                   mode: CupertinoDatePickerMode.time,
-                  initialDateTime: DateTime(0, 0, notificationDay,
-                      notificationHour, notificationMinute),
+                  initialDateTime:
+                      DateTime(0, 0, 0, notificationHour, notificationMinute),
                   itemExtent: 60,
                   use24hFormat: true,
                   onDateTimeChanged: (dateTime) {
@@ -74,8 +73,7 @@ class SettingsNotificationPageView extends StatelessWidget {
                     child: _ButtonAddTask(
                       onTap: () {
                         BlocProvider.of<SettingsBloc>(context).add(
-                            SetNotificationDayTimeEvent(DayTimeNotification(
-                                day: notificationDay,
+                            SetNotificationDayTimeEvent(TimeNotification(
                                 hour: notificationHour,
                                 minute: notificationMinute)));
                         AutoRouter.of(context).pushAndPopUntil(

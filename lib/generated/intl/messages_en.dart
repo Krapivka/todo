@@ -27,7 +27,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m2(day, hour, minute) =>
       "notify ${day} days in advance at ${hour}:${minute}";
 
-  static String m3(nextAge) => "Turns ${nextAge}";
+  static String m3(dateTime) => "Notify in ${dateTime} hours/minutes";
+
+  static String m4(nextAge) => "Turns ${nextAge}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -70,6 +72,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "month": MessageLookupByLibrary.simpleMessage("month"),
         "notification": MessageLookupByLibrary.simpleMessage("Notifications"),
         "notifyDayNInAdvanceAtHourNminuteN": m2,
+        "notifyInDatetimeNHoursminutes": m3,
         "purposeMessageAppInInfo": MessageLookupByLibrary.simpleMessage(
             "We have developed this application with one goal in mind - so that you never forget about your important business. Our app is easily customizable to provide timely reminders and help you complete tasks successfully."),
         "receiveNotificationsTime": MessageLookupByLibrary.simpleMessage(
@@ -85,7 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "thisIsATestNotificationItsAllRight":
             MessageLookupByLibrary.simpleMessage(
                 "This is a test notification. It\'s all right!"),
-        "turnsN": m3,
+        "turnsN": m4,
         "twoWeeks": MessageLookupByLibrary.simpleMessage("2 weeks"),
         "updateTask": MessageLookupByLibrary.simpleMessage("Update task"),
         "week": MessageLookupByLibrary.simpleMessage("week"),

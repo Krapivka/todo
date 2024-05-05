@@ -5,9 +5,9 @@ import 'package:todo/features/settings/data/models/settings.dart';
 import 'package:dartz/dartz.dart';
 
 abstract interface class AbstractSettingsRepository {
-  Future<Either<Failure, DayTimeNotification>> getNotificationDayTime();
+  Future<Either<Failure, TimeNotification>> getNotificationDayTime();
   Future<Either<Failure, void>> setNotificationDayTime(
-      DayTimeNotification notificationDay);
+      TimeNotification notificationDay);
   Future<Either<Failure, String>> getLanguage();
   Future<Either<Failure, void>> setLanguage(String lang);
   Future<Either<Failure, String>> getDateFormat();

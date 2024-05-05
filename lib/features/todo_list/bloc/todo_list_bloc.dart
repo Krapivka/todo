@@ -151,7 +151,6 @@ class TasksListBloc extends Bloc<TasksListEvent, TasksListState> {
           await NotificationService.scheduleTaskNotification(
               task: task,
               id: task.id,
-              interval: result.day,
               dateTime: taskTime,
               hourNotif: result.hour,
               minuteNotif: result.minute);

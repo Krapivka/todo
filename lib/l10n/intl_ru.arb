@@ -41,5 +41,6 @@
   "week": "неделя",
   "chooseDateTime": "Выберите дату и время:",
   "descriptionForTask": "Описание",
-  "howLongDoesItTakeToNotifyAboutATask": "За сколько уведомлять о задаче (часы, минуты)?"
+  "howLongDoesItTakeToNotifyAboutATask": "За сколько уведомлять о задаче (часы, минуты)?",
+  "notifyInDatetimeNHoursminutes": "Уведомлять за {dateTime} часов/минут"
 }

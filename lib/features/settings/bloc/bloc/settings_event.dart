@@ -14,7 +14,7 @@ class InitializeSettingsEvent extends SettingsEvent {
 class SetNotificationDayTimeEvent extends SettingsEvent {
   const SetNotificationDayTimeEvent(this.dayTimeNotification);
 
-  final DayTimeNotification dayTimeNotification;
+  final TimeNotification dayTimeNotification;
   @override
   List<Object> get props => [dayTimeNotification];
 }

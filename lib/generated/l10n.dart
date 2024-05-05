@@ -480,6 +480,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Notify in {dateTime} hours/minutes`
+  String notifyInDatetimeNHoursminutes(Object dateTime) {
+    return Intl.message(
+      'Notify in $dateTime hours/minutes',
+      name: 'notifyInDatetimeNHoursminutes',
+      desc: '',
+      args: [dateTime],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

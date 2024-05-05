@@ -78,7 +78,6 @@ class AddingTaskBloc extends Bloc<AddingTaskEvent, AddingTaskState> {
           await NotificationService.scheduleTaskNotification(
               task: task,
               id: task.id,
-              interval: result.day,
               dateTime: taskTime,
               hourNotif: result.hour,
               minuteNotif: result.minute);

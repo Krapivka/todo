@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract interface class AbstractSettingsLocalDataSource {
-  Future<DayTimeNotification> getNotificationDayTimeNotificationFromCache();
-  Future<void> notificationDayTimeNotificationToCache(
-      DayTimeNotification dayTime);
+  Future<TimeNotification> getNotificationDayTimeNotificationFromCache();
+  Future<void> notificationDayTimeNotificationToCache(TimeNotification dayTime);
   Future<String> getLanguageFromCache();
   Future<void> languageToCache(String lang);
   Future<String> getDateFormatFromCache();
@@ -36,20 +35,19 @@ class SettingsLocalDataSource extends AbstractSettingsLocalDataSource {
   SettingsLocalDataSource({required this.sharedPreferences});
 
   @override
-  Future<DayTimeNotification>
-      getNotificationDayTimeNotificationFromCache() async {
+  Future<TimeNotification> getNotificationDayTimeNotificationFromCache() async {
     String? dayTimeNotification =
         sharedPreferences.getString(keyDayTimeNotification);
     if (dayTimeNotification != null) {
-      return DayTimeNotification.fromJson(dayTimeNotification);
+      return TimeNotification.fromJson(dayTimeNotification);
     }
-    // Значение по умолчанию - day 10, hour 11, minute 0
-    return DayTimeNotification(day: 10, hour: 11, minute: 0);
+    // Значение по умолчанию - day 10, hour 0, minute 30
+    return TimeNotification(hour: 0, minute: 30);
   }
 
   @override
   Future<void> notificationDayTimeNotificationToCache(
-      DayTimeNotification dayTime) async {
+      TimeNotification dayTime) async {
     await sharedPreferences.setString(keyDayTimeNotification, dayTime.toJson());
   }
 
