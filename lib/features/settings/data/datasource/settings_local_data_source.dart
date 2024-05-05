@@ -78,7 +78,7 @@ class SettingsLocalDataSource extends AbstractSettingsLocalDataSource {
   @override
   Future<String> getThemeFromCache() async {
     return sharedPreferences.getString(keyTheme) ??
-        "system"; // Значение по умолчанию - 'light'
+        "system"; // Значение по умолчанию - 'system'
   }
 
   @override

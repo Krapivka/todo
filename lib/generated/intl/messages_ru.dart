@@ -44,8 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "chooseTheme": MessageLookupByLibrary.simpleMessage("Выбор темы"),
         "chooseYourLanguage":
             MessageLookupByLibrary.simpleMessage("Выберите язык:"),
-        "darkThemeModeName":
-            MessageLookupByLibrary.simpleMessage("Темная тема"),
+        "darkThemeModeName": MessageLookupByLibrary.simpleMessage("Темная"),
         "dateFormat": MessageLookupByLibrary.simpleMessage("Формат даты"),
         "daysShouldINotifyAboutTasks": MessageLookupByLibrary.simpleMessage(
             "За сколько дней уведомлять о задачах?"),
@@ -61,23 +60,25 @@ class MessageLookup extends MessageLookupByLibrary {
         "hintTextNameInTextField":
             MessageLookupByLibrary.simpleMessage("Наименование*"),
         "hopeMessageAppInInfo": MessageLookupByLibrary.simpleMessage(
-            "Мы надеемся, что наше приложение сделает ваши поздравления более организованными и запоминающимися."),
+            "Доверьтесь нам в управлении вашим временем, и мы поможем вам достичь максимальной продуктивности."),
+        "howLongDoesItTakeToNotifyAboutATask":
+            MessageLookupByLibrary.simpleMessage(
+                "За сколько уведомлять о задаче (часы, минуты)?"),
         "info": MessageLookupByLibrary.simpleMessage("Информация"),
         "language": MessageLookupByLibrary.simpleMessage("Язык"),
-        "lightThemeModeName":
-            MessageLookupByLibrary.simpleMessage("Светлая тема"),
+        "lightThemeModeName": MessageLookupByLibrary.simpleMessage("Светлая"),
         "month": MessageLookupByLibrary.simpleMessage("месяц"),
         "notification": MessageLookupByLibrary.simpleMessage("Уведомления"),
         "notifyDayNInAdvanceAtHourNminuteN": m2,
         "purposeMessageAppInInfo": MessageLookupByLibrary.simpleMessage(
-            "Приложение предназначено для того, чтобы вы никогда не забывали о днях рождения ваших близких и дорогих людей. С легкостью устанавливайте уведомления, чтобы вовремя поздравить их с праздником!"),
+            "Мы разработали это приложение с одной целью - чтобы вы никогда не забывали о своих важных делах. Наше приложение легко настраивается, чтобы обеспечить своевременные напоминания и помочь  успешно выполнять задачи."),
         "receiveNotificationsTime": MessageLookupByLibrary.simpleMessage(
             "В какое время хотите получать уведомления?"),
         "save": MessageLookupByLibrary.simpleMessage("Сохранить"),
         "search": MessageLookupByLibrary.simpleMessage("Поиск"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "systemThemeModeName":
-            MessageLookupByLibrary.simpleMessage("Системная тема"),
+            MessageLookupByLibrary.simpleMessage("Системная"),
         "tasks": MessageLookupByLibrary.simpleMessage("Задачи"),
         "tasksNotFound":
             MessageLookupByLibrary.simpleMessage("Задача не найдена"),
@@ -90,7 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "updateTask": MessageLookupByLibrary.simpleMessage("Обновить"),
         "week": MessageLookupByLibrary.simpleMessage("неделя"),
         "welcomeMessageInInfo": MessageLookupByLibrary.simpleMessage(
-            "Добро пожаловать в наше приложение напоминаний о днях рождения!"),
+            "Приветствуем вас в нашем приложении для эффективного управления задачами."),
         "youHaveNotEnteredARequiredField": MessageLookupByLibrary.simpleMessage(
             "You have not entered a required field!")
       };

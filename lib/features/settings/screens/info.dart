@@ -43,10 +43,10 @@ class InfoPage extends StatelessWidget {
             ),
 
             const Spacer(), // Размещаем автора внизу экрана
-            Text(
-              S.of(context).authorN(author),
-              style: const TextStyle(fontSize: 14),
-            ),
+            // Text(
+            //   S.of(context).authorN(author),
+            //   style: const TextStyle(fontSize: 14),
+            // ),
           ],
         ),
       ),

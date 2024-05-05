@@ -46,7 +46,7 @@ class SettingsPageView extends StatelessWidget {
               ListTile(
                 leading: const Icon(Icons.language_outlined),
                 title: Text(S.of(context).language),
-                subtitle: Text(state.language),
+                subtitle: MapperLanguage(langCode: state.language),
                 onTap: () {
                   AutoRouter.of(context).push(const LanguageSelectionRoute());
                 },
@@ -62,7 +62,7 @@ class SettingsPageView extends StatelessWidget {
               ListTile(
                 leading: const Icon(Icons.color_lens_outlined),
                 title: Text(S.of(context).theme),
-                subtitle: Text(state.theme.localization),
+                subtitle: MapperTheme(themeMode: state.theme.localization),
                 onTap: () {
                   AutoRouter.of(context).push(const ThemeSelectionRoute());
                 },
@@ -79,5 +79,41 @@ class SettingsPageView extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+class MapperLanguage extends StatelessWidget {
+  final String langCode;
+  const MapperLanguage({super.key, required this.langCode});
+
+  @override
+  Widget build(BuildContext context) {
+    switch (langCode) {
+      case "ru":
+        return const Text("Русский");
+      case "en":
+        return const Text("English");
+      default:
+        return const Text("Русский");
+    }
+  }
+}
+
+class MapperTheme extends StatelessWidget {
+  final String themeMode;
+  const MapperTheme({super.key, required this.themeMode});
+
+  @override
+  Widget build(BuildContext context) {
+    switch (themeMode) {
+      case "light":
+        return Text(S.of(context).lightThemeModeName);
+      case "dark":
+        return Text(S.of(context).darkThemeModeName);
+      case "system":
+        return Text(S.of(context).systemThemeModeName);
+      default:
+        return Text(S.of(context).systemThemeModeName);
+    }
   }
 }

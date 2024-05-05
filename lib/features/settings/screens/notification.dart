@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:todo/core/services/notification/notification_service.dart';
-import 'package:todo/core/utils/constants/Palette.dart';
 import 'package:todo/features/settings/bloc/bloc/settings_bloc.dart';
 import 'package:todo/features/settings/data/models/day_time_notification.dart';
 import 'package:todo/generated/l10n.dart';
@@ -8,6 +7,8 @@ import 'package:todo/router/router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../core/utils/components/action_button.dart';
 
 @RoutePage()
 class SettingsNotificationPage extends StatelessWidget {
@@ -50,31 +51,7 @@ class SettingsNotificationPageView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                S.of(context).daysShouldINotifyAboutTasks,
-                style: const TextStyle(fontSize: 16),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 28.0),
-              child: SizedBox(
-                height: 180,
-                child: CupertinoPicker(
-                  scrollController: FixedExtentScrollController(
-                      initialItem: notificationDay - 1),
-                  looping: true,
-                  itemExtent: 60,
-                  onSelectedItemChanged: (index) {
-                    notificationDay = index + 1;
-                  },
-                  children: List.generate(
-                      30, (index) => Center(child: Text('${index + 1}'))),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                S.of(context).receiveNotificationsTime,
+                S.of(context).howLongDoesItTakeToNotifyAboutATask,
                 style: const TextStyle(fontSize: 16),
               ),
             ),
@@ -121,20 +98,9 @@ class _ButtonAddTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Palette.primaryAccent,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Text(
-            S.of(context).save,
-            style: const TextStyle(color: Palette.secondaryLight),
-          ),
-        ),
-      ),
-    );
+        onTap: onTap,
+        child: ActionButton(
+          text: S.of(context).save,
+        ));
   }
 }

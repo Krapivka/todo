@@ -44,7 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "chooseTheme": MessageLookupByLibrary.simpleMessage("Select themes"),
         "chooseYourLanguage":
             MessageLookupByLibrary.simpleMessage("Select a language:"),
-        "darkThemeModeName": MessageLookupByLibrary.simpleMessage("Dark theme"),
+        "darkThemeModeName": MessageLookupByLibrary.simpleMessage("Dark"),
         "dateFormat": MessageLookupByLibrary.simpleMessage("Date format"),
         "daysShouldINotifyAboutTasks": MessageLookupByLibrary.simpleMessage(
             "How many days should notify about tasks?"),
@@ -60,23 +60,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "hintTextNameInTextField":
             MessageLookupByLibrary.simpleMessage("Title*"),
         "hopeMessageAppInInfo": MessageLookupByLibrary.simpleMessage(
-            "We hope that our application will make your greetings more organized and memorable."),
+            "Trust us to manage your time and we will help you achieve maximum productivity."),
+        "howLongDoesItTakeToNotifyAboutATask":
+            MessageLookupByLibrary.simpleMessage(
+                "How long does it take to notify about a task (hours, minutes)?"),
         "info": MessageLookupByLibrary.simpleMessage("Info"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
-        "lightThemeModeName":
-            MessageLookupByLibrary.simpleMessage("Light theme"),
+        "lightThemeModeName": MessageLookupByLibrary.simpleMessage("Light"),
         "month": MessageLookupByLibrary.simpleMessage("month"),
         "notification": MessageLookupByLibrary.simpleMessage("Notifications"),
         "notifyDayNInAdvanceAtHourNminuteN": m2,
         "purposeMessageAppInInfo": MessageLookupByLibrary.simpleMessage(
-            "The application is designed so that you never forget about the tasks of your loved ones and dear ones. Easily set notifications to wish them a happy holiday on time!"),
+            "We have developed this application with one goal in mind - so that you never forget about your important business. Our app is easily customizable to provide timely reminders and help you complete tasks successfully."),
         "receiveNotificationsTime": MessageLookupByLibrary.simpleMessage(
             "What time do you want to receive notifications?"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
-        "systemThemeModeName":
-            MessageLookupByLibrary.simpleMessage("System theme"),
+        "systemThemeModeName": MessageLookupByLibrary.simpleMessage("System"),
         "tasks": MessageLookupByLibrary.simpleMessage("Tasks"),
         "tasksNotFound":
             MessageLookupByLibrary.simpleMessage("The task was not found"),
@@ -89,7 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "updateTask": MessageLookupByLibrary.simpleMessage("Update task"),
         "week": MessageLookupByLibrary.simpleMessage("week"),
         "welcomeMessageInInfo": MessageLookupByLibrary.simpleMessage(
-            "Welcome to our task reminder app!"),
+            "Welcome to our application for effective task management."),
         "youHaveNotEnteredARequiredField": MessageLookupByLibrary.simpleMessage(
             "You have not entered a required field!")
       };

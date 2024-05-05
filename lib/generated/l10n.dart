@@ -120,30 +120,30 @@ class S {
     );
   }
 
-  /// `System theme`
+  /// `System`
   String get systemThemeModeName {
     return Intl.message(
-      'System theme',
+      'System',
       name: 'systemThemeModeName',
       desc: '',
       args: [],
     );
   }
 
-  /// `Light theme`
+  /// `Light`
   String get lightThemeModeName {
     return Intl.message(
-      'Light theme',
+      'Light',
       name: 'lightThemeModeName',
       desc: '',
       args: [],
     );
   }
 
-  /// `Dark theme`
+  /// `Dark`
   String get darkThemeModeName {
     return Intl.message(
-      'Dark theme',
+      'Dark',
       name: 'darkThemeModeName',
       desc: '',
       args: [],
@@ -210,30 +210,30 @@ class S {
     );
   }
 
-  /// `Welcome to our task reminder app!`
+  /// `Welcome to our application for effective task management.`
   String get welcomeMessageInInfo {
     return Intl.message(
-      'Welcome to our task reminder app!',
+      'Welcome to our application for effective task management.',
       name: 'welcomeMessageInInfo',
       desc: '',
       args: [],
     );
   }
 
-  /// `The application is designed so that you never forget about the tasks of your loved ones and dear ones. Easily set notifications to wish them a happy holiday on time!`
+  /// `We have developed this application with one goal in mind - so that you never forget about your important business. Our app is easily customizable to provide timely reminders and help you complete tasks successfully.`
   String get purposeMessageAppInInfo {
     return Intl.message(
-      'The application is designed so that you never forget about the tasks of your loved ones and dear ones. Easily set notifications to wish them a happy holiday on time!',
+      'We have developed this application with one goal in mind - so that you never forget about your important business. Our app is easily customizable to provide timely reminders and help you complete tasks successfully.',
       name: 'purposeMessageAppInInfo',
       desc: '',
       args: [],
     );
   }
 
-  /// `We hope that our application will make your greetings more organized and memorable.`
+  /// `Trust us to manage your time and we will help you achieve maximum productivity.`
   String get hopeMessageAppInInfo {
     return Intl.message(
-      'We hope that our application will make your greetings more organized and memorable.',
+      'Trust us to manage your time and we will help you achieve maximum productivity.',
       name: 'hopeMessageAppInInfo',
       desc: '',
       args: [],
@@ -466,6 +466,16 @@ class S {
     return Intl.message(
       'Описание',
       name: 'descriptionForTask',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How long does it take to notify about a task (hours, minutes)?`
+  String get howLongDoesItTakeToNotifyAboutATask {
+    return Intl.message(
+      'How long does it take to notify about a task (hours, minutes)?',
+      name: 'howLongDoesItTakeToNotifyAboutATask',
       desc: '',
       args: [],
     );
