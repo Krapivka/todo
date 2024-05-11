@@ -42,5 +42,14 @@
   "chooseDateTime": "Выберите дату и время:",
   "descriptionForTask": "Описание",
   "howLongDoesItTakeToNotifyAboutATask": "За сколько уведомлять о задаче (часы, минуты)?",
-  "notifyInDatetimeNHoursminutes": "Уведомлять за {dateTime} часов/минут"
+  "notifyInDatetimeNHoursminutes": "Уведомлять за {dateTime} часов/минут",
+  "notes": "Заметки",
+  "theNoteIsSaved": "Заметка сохранена",
+  "enterTheTextOfTheNote": "Введите текст заметки",
+  "deleted": "Удалено",
+  "emptyNoteList": "Вы можете добавить заметку, нажав на кнопку \"+\" ниже",
+  "theNoteWasNotFound": "Записка не была найдена",
+  "startTyping": "Начните ввод",
+  "titleNote": "Заголовок",
+  "selectColor": "Select color"
 }

@@ -64,7 +64,11 @@ class TasksListBloc extends Bloc<TasksListEvent, TasksListState> {
         debugPrint("Search: ${event.query}");
         final sortedList = result
             .where((task) =>
-                task.title.toLowerCase().contains(query.toLowerCase()))
+                (task.title.toLowerCase().contains(query.toLowerCase()) ||
+                    (task.description != null &&
+                        task.description!
+                            .toLowerCase()
+                            .contains(query.toLowerCase()))))
             .toList();
 
         emit(

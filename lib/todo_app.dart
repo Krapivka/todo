@@ -1,3 +1,5 @@
+import 'package:todo/core/data/repositories/note_repository_impl.dart';
+import 'package:todo/core/domain/repositories/note_repository.dart';
 import 'package:todo/core/domain/repositories/task_repository.dart';
 
 import 'package:todo/core/utils/theme/theme.dart';
@@ -16,15 +18,18 @@ late final windowSize;
 class App extends StatelessWidget {
   final AbstractTaskRepository taskRepository;
   final AbstractSettingsRepository settingsRepository;
+  final AbstractNoteRepository noteRepository;
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
   static const String name = 'Task Calendar';
   static const Color mainColor = Colors.deepPurple;
 
-  const App(
-      {super.key,
-      required this.taskRepository,
-      required this.settingsRepository});
+  const App({
+    super.key,
+    required this.taskRepository,
+    required this.settingsRepository,
+    required this.noteRepository,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +40,9 @@ class App extends StatelessWidget {
           ),
           RepositoryProvider.value(
             value: settingsRepository,
+          ),
+          RepositoryProvider.value(
+            value: noteRepository,
           ),
         ],
         child: MultiBlocProvider(
@@ -47,7 +55,7 @@ class App extends StatelessWidget {
                     settingsRepository:
                         RepositoryProvider.of<AbstractSettingsRepository>(
                             context))
-                  ..add(const InitializeSettingsEvent()))
+                  ..add(const InitializeSettingsEvent())),
           ],
           child: AppView(),
         ));

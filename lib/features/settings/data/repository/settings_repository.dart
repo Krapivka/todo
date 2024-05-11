@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:todo/core/error/exception.dart';
 import 'package:todo/core/error/failure.dart';
 import 'package:todo/features/settings/data/datasource/settings_local_data_source.dart';
@@ -15,8 +16,8 @@ class SettingsRepository implements AbstractSettingsRepository {
     try {
       final dateFormat = await localDataSource.getDateFormatFromCache();
       return Right(dateFormat);
-    } on CacheException {
-      return Left(CacheFailure());
+    } catch (e) {
+      return Left(CacheFailure(e));
     }
   }
 
@@ -25,8 +26,8 @@ class SettingsRepository implements AbstractSettingsRepository {
     try {
       final lang = await localDataSource.getLanguageFromCache();
       return Right(lang);
-    } on CacheException {
-      return Left(CacheFailure());
+    } catch (e) {
+      return Left(CacheFailure(e));
     }
   }
 
@@ -36,8 +37,8 @@ class SettingsRepository implements AbstractSettingsRepository {
       final notificationDay =
           await localDataSource.getNotificationDayTimeNotificationFromCache();
       return Right(notificationDay);
-    } on CacheException {
-      return Left(CacheFailure());
+    } catch (e) {
+      return Left(CacheFailure(e));
     }
   }
 
@@ -46,8 +47,8 @@ class SettingsRepository implements AbstractSettingsRepository {
     try {
       final theme = await localDataSource.getThemeFromCache();
       return Right(theme);
-    } on CacheException {
-      return Left(CacheFailure());
+    } catch (e) {
+      return Left(CacheFailure(e));
     }
   }
 
@@ -55,8 +56,8 @@ class SettingsRepository implements AbstractSettingsRepository {
   Future<Either<Failure, void>> setDateFormat(String dateFormat) async {
     try {
       return Right(await localDataSource.dateFormatToCache(dateFormat));
-    } on CacheException {
-      return Left(CacheFailure());
+    } catch (e) {
+      return Left(CacheFailure(e));
     }
   }
 
@@ -64,8 +65,8 @@ class SettingsRepository implements AbstractSettingsRepository {
   Future<Either<Failure, void>> setLanguage(String lang) async {
     try {
       return Right(await localDataSource.languageToCache(lang));
-    } on CacheException {
-      return Left(CacheFailure());
+    } catch (e) {
+      return Left(CacheFailure(e));
     }
   }
 
@@ -75,8 +76,8 @@ class SettingsRepository implements AbstractSettingsRepository {
     try {
       return Right(await localDataSource
           .notificationDayTimeNotificationToCache(dayTime));
-    } on CacheException {
-      return Left(CacheFailure());
+    } catch (e) {
+      return Left(CacheFailure(e));
     }
   }
 
@@ -84,8 +85,8 @@ class SettingsRepository implements AbstractSettingsRepository {
   Future<Either<Failure, void>> setTheme(AppThemeMode theme) async {
     try {
       return Right(await localDataSource.themeToCache(theme));
-    } on CacheException {
-      return Left(CacheFailure());
+    } catch (e) {
+      return Left(CacheFailure(e));
     }
   }
 
@@ -96,13 +97,13 @@ class SettingsRepository implements AbstractSettingsRepository {
     TimeNotification dayTimeNotification = TimeNotification(hour: 0, minute: 0);
     AppThemeMode theme = AppThemeMode.system;
     try {
-      (await getDateFormat())
-          .fold((failure) => CacheFailure(), (result) => dateFormat = result);
-      (await getLanguage())
-          .fold((failure) => CacheFailure(), (result) => language = result);
-      (await getNotificationDayTime()).fold((failure) => CacheFailure(),
+      (await getDateFormat()).fold(
+          (failure) => debugPrint("error"), (result) => dateFormat = result);
+      (await getLanguage()).fold(
+          (failure) => debugPrint("error"), (result) => language = result);
+      (await getNotificationDayTime()).fold((failure) => debugPrint("error"),
           (result) => dayTimeNotification = result);
-      (await getTheme()).fold((failure) => CacheFailure(), (result) {
+      (await getTheme()).fold((failure) => debugPrint("error"), (result) {
         switch (result) {
           case "system":
             theme = AppThemeMode.system;
@@ -120,8 +121,8 @@ class SettingsRepository implements AbstractSettingsRepository {
           language: language,
           dateFormat: dateFormat,
           theme: theme)));
-    } on CacheException {
-      return Left(CacheFailure());
+    } catch (e) {
+      return Left(CacheFailure(e));
     }
   }
 }

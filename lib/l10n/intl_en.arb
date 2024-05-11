@@ -42,5 +42,14 @@
   "chooseDateTime": "Выберите дату и время:",
   "descriptionForTask": "Описание",
   "howLongDoesItTakeToNotifyAboutATask": "How long does it take to notify about a task (hours, minutes)?",
-  "notifyInDatetimeNHoursminutes": "Notify in {dateTime} hours/minutes"
+  "notifyInDatetimeNHoursminutes": "Notify in {dateTime} hours/minutes",
+  "theNoteIsSaved": "The note is saved",
+  "enterTheTextOfTheNote": "Enter the text of the note",
+  "deleted": "Deleted",
+  "emptyNoteList": "You can add a note by clicking the \"+\" button below",
+  "theNoteWasNotFound": "The note was not found",
+  "notes": "Notes",
+  "startTyping": "Start typing",
+  "titleNote": "Title",
+  "selectColor": "Select color"
 }

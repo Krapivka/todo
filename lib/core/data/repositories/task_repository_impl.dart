@@ -16,8 +16,8 @@ class TaskRepository implements AbstractTaskRepository {
     try {
       final locationTask = await localDataSource.getTasksFromCache();
       return Right(locationTask);
-    } on CacheException {
-      return Left(CacheFailure());
+    } catch (e) {
+      return Left(CacheFailure(e));
     }
   }
 
@@ -26,8 +26,8 @@ class TaskRepository implements AbstractTaskRepository {
     try {
       final locationTask = await localDataSource.getTasksFromCache();
       return Right(locationTask);
-    } on CacheException {
-      return Left(CacheFailure());
+    } catch (e) {
+      return Left(CacheFailure(e));
     }
   }
 
@@ -35,8 +35,8 @@ class TaskRepository implements AbstractTaskRepository {
   Future<Either<Failure, void>> addTask(TaskEntity task) async {
     try {
       return Right(await localDataSource.oneTaskToCache(task as TaskModel));
-    } on CacheException {
-      return Left(CacheFailure());
+    } catch (e) {
+      return Left(CacheFailure(e));
     }
   }
 
@@ -54,7 +54,7 @@ class TaskRepository implements AbstractTaskRepository {
     try {
       return Right(await localDataSource.deleteTaskById(id));
     } catch (e) {
-      return Left(CacheFailure());
+      return Left(CacheFailure(e));
     }
   }
 
@@ -63,7 +63,7 @@ class TaskRepository implements AbstractTaskRepository {
     try {
       return Right(await localDataSource.updateTask(task));
     } catch (e) {
-      return Left(CacheFailure());
+      return Left(CacheFailure(e));
     }
   }
 }

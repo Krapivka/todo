@@ -47,6 +47,17 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const LanguageSelectionPage(),
       );
     },
+    NoteRoute.name: (routeData) {
+      final args =
+          routeData.argsAs<NoteRouteArgs>(orElse: () => const NoteRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: NotePage(
+          key: args.key,
+          note: args.note,
+        ),
+      );
+    },
     SettingsNotificationRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -160,6 +171,43 @@ class LanguageSelectionRoute extends PageRouteInfo<void> {
   static const String name = 'LanguageSelectionRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [NotePage]
+class NoteRoute extends PageRouteInfo<NoteRouteArgs> {
+  NoteRoute({
+    Key? key,
+    NoteEntity? note,
+    List<PageRouteInfo>? children,
+  }) : super(
+          NoteRoute.name,
+          args: NoteRouteArgs(
+            key: key,
+            note: note,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'NoteRoute';
+
+  static const PageInfo<NoteRouteArgs> page = PageInfo<NoteRouteArgs>(name);
+}
+
+class NoteRouteArgs {
+  const NoteRouteArgs({
+    this.key,
+    this.note,
+  });
+
+  final Key? key;
+
+  final NoteEntity? note;
+
+  @override
+  String toString() {
+    return 'NoteRouteArgs{key: $key, note: $note}';
+  }
 }
 
 /// generated route for

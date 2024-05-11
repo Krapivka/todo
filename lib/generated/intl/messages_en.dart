@@ -50,13 +50,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateFormat": MessageLookupByLibrary.simpleMessage("Date format"),
         "daysShouldINotifyAboutTasks": MessageLookupByLibrary.simpleMessage(
             "How many days should notify about tasks?"),
+        "deleted": MessageLookupByLibrary.simpleMessage("Deleted"),
         "descriptionForTask": MessageLookupByLibrary.simpleMessage("Описание"),
         "emptyDayCalendar": MessageLookupByLibrary.simpleMessage(
             "There are no tasks on this day"),
+        "emptyNoteList": MessageLookupByLibrary.simpleMessage(
+            "You can add a note by clicking the \"+\" button below"),
         "emptyTasksList": MessageLookupByLibrary.simpleMessage(
             "You can add a task by clicking the \"+\" button below"),
         "enterNameInTextField":
             MessageLookupByLibrary.simpleMessage("Enter name"),
+        "enterTheTextOfTheNote":
+            MessageLookupByLibrary.simpleMessage("Enter the text of the note"),
         "fillInTheRequiredFields":
             MessageLookupByLibrary.simpleMessage("Fill in the required fields"),
         "hintTextNameInTextField":
@@ -70,6 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "lightThemeModeName": MessageLookupByLibrary.simpleMessage("Light"),
         "month": MessageLookupByLibrary.simpleMessage("month"),
+        "notes": MessageLookupByLibrary.simpleMessage("Notes"),
         "notification": MessageLookupByLibrary.simpleMessage("Notifications"),
         "notifyDayNInAdvanceAtHourNminuteN": m2,
         "notifyInDatetimeNHoursminutes": m3,
@@ -79,15 +85,22 @@ class MessageLookup extends MessageLookupByLibrary {
             "What time do you want to receive notifications?"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
+        "selectColor": MessageLookupByLibrary.simpleMessage("Select color"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "startTyping": MessageLookupByLibrary.simpleMessage("Start typing"),
         "systemThemeModeName": MessageLookupByLibrary.simpleMessage("System"),
         "tasks": MessageLookupByLibrary.simpleMessage("Tasks"),
         "tasksNotFound":
             MessageLookupByLibrary.simpleMessage("The task was not found"),
+        "theNoteIsSaved":
+            MessageLookupByLibrary.simpleMessage("The note is saved"),
+        "theNoteWasNotFound":
+            MessageLookupByLibrary.simpleMessage("The note was not found"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "thisIsATestNotificationItsAllRight":
             MessageLookupByLibrary.simpleMessage(
                 "This is a test notification. It\'s all right!"),
+        "titleNote": MessageLookupByLibrary.simpleMessage("Title"),
         "turnsN": m4,
         "twoWeeks": MessageLookupByLibrary.simpleMessage("2 weeks"),
         "updateTask": MessageLookupByLibrary.simpleMessage("Update task"),

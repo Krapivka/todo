@@ -50,13 +50,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateFormat": MessageLookupByLibrary.simpleMessage("Формат даты"),
         "daysShouldINotifyAboutTasks": MessageLookupByLibrary.simpleMessage(
             "За сколько дней уведомлять о задачах?"),
+        "deleted": MessageLookupByLibrary.simpleMessage("Удалено"),
         "descriptionForTask": MessageLookupByLibrary.simpleMessage("Описание"),
         "emptyDayCalendar":
             MessageLookupByLibrary.simpleMessage("В этот день нет задач"),
+        "emptyNoteList": MessageLookupByLibrary.simpleMessage(
+            "Вы можете добавить заметку, нажав на кнопку \"+\" ниже"),
         "emptyTasksList": MessageLookupByLibrary.simpleMessage(
             "Вы можете добавить задачу, нажав кнопку \"+\" ниже"),
         "enterNameInTextField":
             MessageLookupByLibrary.simpleMessage("Введите наименование"),
+        "enterTheTextOfTheNote":
+            MessageLookupByLibrary.simpleMessage("Введите текст заметки"),
         "fillInTheRequiredFields":
             MessageLookupByLibrary.simpleMessage("Заполните обязательные поля"),
         "hintTextNameInTextField":
@@ -70,6 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("Язык"),
         "lightThemeModeName": MessageLookupByLibrary.simpleMessage("Светлая"),
         "month": MessageLookupByLibrary.simpleMessage("месяц"),
+        "notes": MessageLookupByLibrary.simpleMessage("Заметки"),
         "notification": MessageLookupByLibrary.simpleMessage("Уведомления"),
         "notifyDayNInAdvanceAtHourNminuteN": m2,
         "notifyInDatetimeNHoursminutes": m3,
@@ -79,16 +85,23 @@ class MessageLookup extends MessageLookupByLibrary {
             "В какое время хотите получать уведомления?"),
         "save": MessageLookupByLibrary.simpleMessage("Сохранить"),
         "search": MessageLookupByLibrary.simpleMessage("Поиск"),
+        "selectColor": MessageLookupByLibrary.simpleMessage("Select color"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
+        "startTyping": MessageLookupByLibrary.simpleMessage("Начните ввод"),
         "systemThemeModeName":
             MessageLookupByLibrary.simpleMessage("Системная"),
         "tasks": MessageLookupByLibrary.simpleMessage("Задачи"),
         "tasksNotFound":
             MessageLookupByLibrary.simpleMessage("Задача не найдена"),
+        "theNoteIsSaved":
+            MessageLookupByLibrary.simpleMessage("Заметка сохранена"),
+        "theNoteWasNotFound":
+            MessageLookupByLibrary.simpleMessage("Записка не была найдена"),
         "theme": MessageLookupByLibrary.simpleMessage("Тема"),
         "thisIsATestNotificationItsAllRight":
             MessageLookupByLibrary.simpleMessage(
                 "Это тестовое уведомление. Всё работает!"),
+        "titleNote": MessageLookupByLibrary.simpleMessage("Заголовок"),
         "turnsN": m4,
         "twoWeeks": MessageLookupByLibrary.simpleMessage("2 недели"),
         "updateTask": MessageLookupByLibrary.simpleMessage("Обновить"),

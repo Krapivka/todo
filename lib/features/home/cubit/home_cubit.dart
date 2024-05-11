@@ -10,9 +10,12 @@ class HomeCubit extends Cubit<HomeState> {
     HomeTab tab = HomeTab.tasks;
     switch (index) {
       case 0:
-        tab = HomeTab.tasks;
+        tab = HomeTab.note;
         break;
       case 1:
+        tab = HomeTab.tasks;
+        break;
+      case 2:
         tab = HomeTab.calendar;
         break;
     }

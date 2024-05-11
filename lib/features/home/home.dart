@@ -1,5 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:todo/core/domain/repositories/note_repository.dart';
 import 'package:todo/core/domain/repositories/task_repository.dart';
+import 'package:todo/features/note/bloc/note_bloc.dart';
+import 'package:todo/features/note_list/bloc/note_list_bloc.dart';
+import 'package:todo/features/note_list/note_list.dart';
 import 'package:todo/features/todo_list/todo_list.dart';
 import 'package:todo/features/todo_list/bloc/todo_list_bloc.dart';
 import 'package:todo/features/calendar/calendar.dart';
@@ -19,11 +23,18 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return MultiBlocProvider(providers: [
+      BlocProvider(
         create: (context) => TasksListBloc(
             RepositoryProvider.of<AbstractTaskRepository>(context),
             RepositoryProvider.of<AbstractSettingsRepository>(context)),
-        child: const HomeView());
+      ),
+      BlocProvider(
+        create: (context) => NotesListBloc(
+            RepositoryProvider.of<AbstractNoteRepository>(context),
+            RepositoryProvider.of<AbstractSettingsRepository>(context)),
+      )
+    ], child: const HomeView());
   }
 }
 
@@ -35,6 +46,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final selectedTab = context.select((HomeCubit cubit) => cubit.state.tab);
+    final notesListBloc = BlocProvider.of<NotesListBloc>(context);
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -42,23 +54,39 @@ class HomeView extends StatelessWidget {
                 AutoRouter.of(context).push(const SettingsRoute());
               },
               icon: const Icon(Icons.menu)),
-          title: Text(
-            S.of(context).tasks,
-          ),
+          title: Text(selectedTab.index == 0
+              ? S.of(context).notes
+              : selectedTab.index == 1
+                  ? S.of(context).tasks
+                  : S.of(context).calendar),
           centerTitle: true,
           actions: [
-            BlocBuilder<TasksListBloc, TasksListState>(
+            BlocBuilder<NotesListBloc, NotesListState>(
               builder: (context, state) {
-                return Visibility(
-                  visible:
-                      state.selectedTaskId.isNotEmpty && selectedTab.index == 0,
-                  child: IconButton(
-                    icon: const Icon(Icons.delete),
-                    onPressed: () {
-                      BlocProvider.of<TasksListBloc>(context)
-                          .add(const DeleteTaskTasksListEvent());
-                    },
-                  ),
+                return BlocBuilder<TasksListBloc, TasksListState>(
+                  builder: (context, state) {
+                    bool isDelTask = (state.selectedTaskId.isNotEmpty &&
+                        (selectedTab.index == 1 || selectedTab.index == 2));
+                    bool isDelNote =
+                        ((notesListBloc.state.selectedNoteId.isNotEmpty &&
+                            selectedTab.index == 0));
+                    return Visibility(
+                      visible: isDelTask || isDelNote,
+                      child: IconButton(
+                        icon: const Icon(Icons.delete),
+                        onPressed: () {
+                          if (isDelNote) {
+                            BlocProvider.of<NotesListBloc>(context)
+                                .add(const DeleteNoteNotesListEvent());
+                          }
+                          if (isDelTask) {
+                            BlocProvider.of<TasksListBloc>(context)
+                                .add(const DeleteTaskTasksListEvent());
+                          }
+                        },
+                      ),
+                    );
+                  },
                 );
               },
             )
@@ -72,6 +100,11 @@ class HomeView extends StatelessWidget {
           },
           destinations: <Widget>[
             NavigationDestination(
+              selectedIcon: const Icon(Icons.note_add),
+              icon: const Icon(Icons.note_add_outlined),
+              label: S.of(context).notes,
+            ),
+            NavigationDestination(
               selectedIcon: const Icon(Icons.task),
               icon: const Icon(Icons.task_outlined),
               label: S.of(context).tasks,
@@ -81,20 +114,35 @@ class HomeView extends StatelessWidget {
               icon: const Icon(Icons.calendar_month_outlined),
               label: S.of(context).calendar,
             ),
+            const NavigationDestination(
+              icon: Icon(Icons.calendar_month_outlined),
+              label: "",
+            ),
           ],
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            AutoRouter.of(context).push(const AddingTaskRoute());
-          },
-          child: const Icon(
-            Icons.add,
-          ),
-        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
+        floatingActionButton: selectedTab.index == 0
+            ? FloatingActionButton(
+                onPressed: () {
+                  AutoRouter.of(context).push(NoteRoute());
+                },
+                child: const Icon(
+                  Icons.add,
+                ))
+            : FloatingActionButton(
+                onPressed: () {
+                  AutoRouter.of(context).push(const AddingTaskRoute());
+                },
+                child: const Icon(
+                  Icons.add,
+                )),
         body: IndexedStack(
           index: selectedTab.index,
-          children: const [TasksListPage(), CalendarPage()],
+          children: const [
+            NotesListPage(),
+            TasksListPage(),
+            CalendarPage(),
+          ],
         ));
   }
 }

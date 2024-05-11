@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo/core/data/datasources/note_local_data_source.dart';
 // import 'package:talker_bloc_logger/talker_bloc_logger.dart';
 // import 'package:talker_flutter/talker_flutter.dart';
 import 'package:todo/core/data/datasources/task_local_data_source.dart';
+import 'package:todo/core/data/repositories/note_repository_impl.dart';
 import 'package:todo/core/data/repositories/task_repository_impl.dart';
 import 'package:todo/core/services/ads/yandex_ads/open_ad/app_open_ad_manager.dart';
 import 'package:todo/core/services/notification/notification_service.dart';
@@ -47,21 +49,29 @@ void main() async {
   //initialize local storage
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
-  final taskApi = TaskLocalDataSourceImpl(sharedPreferences: sharedPreferences);
-  final settingsApi =
-      SettingsLocalDataSource(sharedPreferences: sharedPreferences);
+  final taskRepository = TaskRepository(
+    localDataSource:
+        TaskLocalDataSourceImpl(sharedPreferences: sharedPreferences),
+  );
 
-  final taskRepository = TaskRepository(localDataSource: taskApi);
-  final settingsRepository = SettingsRepository(localDataSource: settingsApi);
+  final settingsRepository = SettingsRepository(
+    localDataSource:
+        SettingsLocalDataSource(sharedPreferences: sharedPreferences),
+  );
+
+  final noteRepository = NoteRepository(
+    localDataSource:
+        NoteLocalDataSourceImpl(sharedPreferences: sharedPreferences),
+  );
 
   // FlutterError.onError =
   //     ((details) => GetIt.I<Talker>().handle(details.exception, details.stack));
   // runZonedGuarded(
   //     () =>
   runApp(App(
-    taskRepository: taskRepository,
-    settingsRepository: settingsRepository,
-  ));
+      taskRepository: taskRepository,
+      settingsRepository: settingsRepository,
+      noteRepository: noteRepository));
   //     ),
   // (e, st) => GetIt.I<Talker>().handle(e, st));
 }

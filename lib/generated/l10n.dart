@@ -490,6 +490,96 @@ class S {
       args: [dateTime],
     );
   }
+
+  /// `The note is saved`
+  String get theNoteIsSaved {
+    return Intl.message(
+      'The note is saved',
+      name: 'theNoteIsSaved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter the text of the note`
+  String get enterTheTextOfTheNote {
+    return Intl.message(
+      'Enter the text of the note',
+      name: 'enterTheTextOfTheNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deleted`
+  String get deleted {
+    return Intl.message(
+      'Deleted',
+      name: 'deleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You can add a note by clicking the "+" button below`
+  String get emptyNoteList {
+    return Intl.message(
+      'You can add a note by clicking the "+" button below',
+      name: 'emptyNoteList',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The note was not found`
+  String get theNoteWasNotFound {
+    return Intl.message(
+      'The note was not found',
+      name: 'theNoteWasNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notes`
+  String get notes {
+    return Intl.message(
+      'Notes',
+      name: 'notes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start typing`
+  String get startTyping {
+    return Intl.message(
+      'Start typing',
+      name: 'startTyping',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Title`
+  String get titleNote {
+    return Intl.message(
+      'Title',
+      name: 'titleNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select color`
+  String get selectColor {
+    return Intl.message(
+      'Select color',
+      name: 'selectColor',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

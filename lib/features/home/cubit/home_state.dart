@@ -1,6 +1,6 @@
 part of 'home_cubit.dart';
 
-enum HomeTab { tasks, calendar }
+enum HomeTab { note, tasks, calendar }
 
 class HomeState extends Equatable {
   const HomeState({

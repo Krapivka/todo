@@ -2,17 +2,19 @@ import 'package:todo/core/utils/constants/Palette.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldTaskChanges extends StatelessWidget {
-  const TextFieldTaskChanges(
-      {super.key,
-      this.onChanged,
-      this.labelText,
-      this.hintText,
-      this.icon,
-      this.onTap,
-      this.showCursor = true,
-      this.controller,
-      // ignore: unused_element
-      this.readOnly = false});
+  const TextFieldTaskChanges({
+    super.key,
+    this.onChanged,
+    this.labelText,
+    this.hintText,
+    this.icon,
+    this.onTap,
+    this.showCursor = true,
+    this.controller,
+    // ignore: unused_element
+    this.readOnly = false,
+    this.maxLines,
+  });
   final void Function(String)? onChanged;
   final String? labelText;
   final String? hintText;
@@ -21,6 +23,7 @@ class TextFieldTaskChanges extends StatelessWidget {
   final void Function()? onTap;
   final TextEditingController? controller;
   final bool? showCursor;
+  final int? maxLines;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,6 +35,7 @@ class TextFieldTaskChanges extends StatelessWidget {
         enableInteractiveSelection: true,
         onChanged: onChanged,
         controller: controller,
+        maxLines: maxLines,
         decoration: InputDecoration(
           prefixIcon: icon,
           border: const OutlineInputBorder(
