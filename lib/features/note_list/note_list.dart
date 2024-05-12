@@ -44,68 +44,64 @@ class _NotesListViewState extends State<NotesListView> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
-                child: Expanded(
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.7,
-                    child: BlocBuilder<NotesListBloc, NotesListState>(
-                        builder: (context, state) {
-                      if (state.noteListStatus == NotesListStatus.loading) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.7,
+                  child: BlocBuilder<NotesListBloc, NotesListState>(
+                      builder: (context, state) {
+                    if (state.noteListStatus == NotesListStatus.loading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    if (state.noteListStatus == NotesListStatus.loaded) {
+                      final List<NoteEntity> notes = state.listNoteModel;
+                      if (notes.isNotEmpty) {
+                        return MasonryGridView.count(
+                          shrinkWrap: true,
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 7,
+                          mainAxisSpacing: 7,
+                          itemCount: notes.length,
+                          itemBuilder: (context, index) {
+                            return NoteCard(note: notes[index]);
+                          },
                         );
-                      }
-                      if (state.noteListStatus == NotesListStatus.loaded) {
-                        final List<NoteEntity> notes = state.listNoteModel;
-                        if (notes.isNotEmpty) {
-                          return MasonryGridView.count(
-                            shrinkWrap: true,
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 7,
-                            mainAxisSpacing: 7,
-                            itemCount: notes.length,
-                            itemBuilder: (context, index) {
-                              return NoteCard(note: notes[index]);
-                            },
-                          );
-                        } else {
-                          return Center(
-                              child: Padding(
-                            padding: const EdgeInsets.all(50.0),
-                            child: Align(
-                              child: Text(
-                                S.of(context).emptyNoteList,
-                                textAlign: TextAlign.center,
-                              ),
+                      } else {
+                        return Center(
+                            child: Padding(
+                          padding: const EdgeInsets.all(50.0),
+                          child: Align(
+                            child: Text(
+                              S.of(context).emptyNoteList,
+                              textAlign: TextAlign.center,
                             ),
-                          ));
-                        }
+                          ),
+                        ));
                       }
-                      if (state.noteListStatus ==
-                          NotesListStatus.searchLoaded) {
-                        final List<NoteEntity> notes =
-                            state.sortedListNoteModel;
+                    }
+                    if (state.noteListStatus == NotesListStatus.searchLoaded) {
+                      final List<NoteEntity> notes = state.sortedListNoteModel;
 
-                        if (notes.isNotEmpty) {
-                          return MasonryGridView.count(
-                            shrinkWrap: true,
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 7,
-                            mainAxisSpacing: 7,
-                            itemCount: notes.length,
-                            itemBuilder: (context, index) {
-                              return NoteCard(note: notes[index]);
-                            },
-                          );
-                        } else {
-                          return Center(
-                              child: Text(
-                            S.of(context).theNoteWasNotFound,
-                          ));
-                        }
+                      if (notes.isNotEmpty) {
+                        return MasonryGridView.count(
+                          shrinkWrap: true,
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 7,
+                          mainAxisSpacing: 7,
+                          itemCount: notes.length,
+                          itemBuilder: (context, index) {
+                            return NoteCard(note: notes[index]);
+                          },
+                        );
+                      } else {
+                        return Center(
+                            child: Text(
+                          S.of(context).theNoteWasNotFound,
+                        ));
                       }
-                      return const SizedBox();
-                    }),
-                  ),
+                    }
+                    return const SizedBox();
+                  }),
                 ),
               ),
             ),

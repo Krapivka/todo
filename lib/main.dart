@@ -28,8 +28,8 @@ void main() async {
   FirebaseAnalytics analytics = FirebaseAnalytics.instance;
   await analytics.logAppOpen();
   //loading open ad
-  GetIt.I.registerSingleton<AppOpenAdManager>(AppOpenAdManager());
-  GetIt.I<AppOpenAdManager>().loadAppOpenAd();
+  // GetIt.I.registerSingleton<AppOpenAdManager>(AppOpenAdManager());
+  // GetIt.I<AppOpenAdManager>().loadAppOpenAd();
 
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
   GetIt.I.registerSingletonAsync<PackageInfo>(() async {
