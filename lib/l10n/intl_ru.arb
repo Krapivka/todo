@@ -47,7 +47,7 @@
   "theNoteIsSaved": "Заметка сохранена",
   "enterTheTextOfTheNote": "Введите текст заметки",
   "deleted": "Удалено",
-  "emptyNoteList": "Вы можете добавить заметку, нажав на кнопку \"+\" ниже",
+  "emptyNoteList": "Вы можете добавить заметку, нажав кнопку \"+\" ниже",
   "theNoteWasNotFound": "Заметка не была найдена",
   "startTyping": "Начните ввод",
   "titleNote": "Заголовок",

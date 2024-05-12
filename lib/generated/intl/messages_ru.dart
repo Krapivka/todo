@@ -55,7 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "emptyDayCalendar":
             MessageLookupByLibrary.simpleMessage("В этот день нет задач"),
         "emptyNoteList": MessageLookupByLibrary.simpleMessage(
-            "Вы можете добавить заметку, нажав на кнопку \"+\" ниже"),
+            "Вы можете добавить заметку, нажав кнопку \"+\" ниже"),
         "emptyTasksList": MessageLookupByLibrary.simpleMessage(
             "Вы можете добавить задачу, нажав кнопку \"+\" ниже"),
         "enterNameInTextField":

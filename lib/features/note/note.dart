@@ -40,16 +40,16 @@ class NoteView extends StatelessWidget {
     final bloc = BlocProvider.of<NoteBloc>(context);
     final settingsBloc = BlocProvider.of<SettingsBloc>(context);
     bloc.add(NoteLoadEvent());
-
     return BlocConsumer<NoteBloc, NoteState>(listener: (context, state) {
       if (state.noteStatus == NoteStatus.saved) {
         AutoRouter.of(context).pushNamed("/");
       }
-    }, builder: (context, state) {
-      if (state.noteStatus == NoteStatus.loaded) {
+      if (state.noteStatus == NoteStatus.loading) {
         noteTitleController.text = bloc.state.title;
         noteDescController.text = bloc.state.note;
-        return Scaffold(
+      }
+    }, builder: (context, state) {
+      return Scaffold(
           appBar: AppBar(
             actions: [
               state.isUpdate
@@ -85,63 +85,63 @@ class NoteView extends StatelessWidget {
                   ))
             ],
           ),
-          body: Padding(
-            padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
-            child: Column(
-              children: [
-                const BannerAdWidget(
-                  isSticky: true,
-                ),
-                TextField(
-                  controller: noteTitleController,
-                  onChanged: (title) {
-                    BlocProvider.of<NoteBloc>(context)
-                        .add(TitleChangedEvent(title: title));
-                  },
-                  enableInteractiveSelection: true,
-                  decoration: InputDecoration(
-                    hintText: S.of(context).titleNote,
-                    border: InputBorder.none,
+          body: (state.noteStatus == NoteStatus.loaded)
+              ? Padding(
+                  padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
+                  child: Column(
+                    children: [
+                      const BannerAdWidget(
+                        isSticky: true,
+                      ),
+                      TextField(
+                        controller: noteTitleController,
+                        onChanged: (title) {
+                          BlocProvider.of<NoteBloc>(context)
+                              .add(TitleChangedEvent(title: title));
+                        },
+                        enableInteractiveSelection: true,
+                        decoration: InputDecoration(
+                          hintText: S.of(context).titleNote,
+                          border: InputBorder.none,
+                        ),
+                        style: const TextStyle(fontSize: 28),
+                      ),
+                      Row(
+                        children: [
+                          Text(DateTimeUtils.formatDate(
+                              DateTime.now(), settingsBloc.state.dateFormat)),
+                          const Text("  |  "),
+                          Text(state.note.length.toString())
+                        ],
+                      ),
+                      Expanded(
+                        child: TextField(
+                          controller: noteDescController,
+                          keyboardType: TextInputType.multiline,
+                          maxLines: null,
+                          onChanged: (value) {
+                            BlocProvider.of<NoteBloc>(context)
+                                .add(NoteChangedEvent(note: value));
+                          },
+                          enableInteractiveSelection: true,
+                          decoration: InputDecoration(
+                            hintText: S.of(context).startTyping,
+                            border: InputBorder.none,
+                          ),
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: state.isUpdate
+                            ? _ButtonAddNote(title: S.of(context).save)
+                            : _ButtonAddNote(
+                                title: S.of(context).addTaskButton),
+                      ),
+                    ],
                   ),
-                  style: const TextStyle(fontSize: 28),
-                ),
-                Row(
-                  children: [
-                    Text(DateTimeUtils.formatDate(
-                        DateTime.now(), settingsBloc.state.dateFormat)),
-                    const Text("  |  "),
-                    Text(state.note.length.toString())
-                  ],
-                ),
-                Expanded(
-                  child: TextField(
-                    controller: noteDescController,
-                    keyboardType: TextInputType.multiline,
-                    maxLines: null,
-                    onChanged: (value) {
-                      BlocProvider.of<NoteBloc>(context)
-                          .add(NoteChangedEvent(note: value));
-                    },
-                    enableInteractiveSelection: true,
-                    decoration: InputDecoration(
-                      hintText: S.of(context).startTyping,
-                      border: InputBorder.none,
-                    ),
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: state.isUpdate
-                      ? _ButtonAddNote(title: S.of(context).save)
-                      : _ButtonAddNote(title: S.of(context).addTaskButton),
-                ),
-              ],
-            ),
-          ),
-        );
-      }
-      return const SizedBox();
+                )
+              : const SizedBox());
     });
   }
 }

@@ -32,6 +32,7 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
         color: Color(int.parse(noteEntity!.color)),
       ));
     }
+    emit(state.copyWith(noteStatus: NoteStatus.loading));
     emit(state.copyWith(noteStatus: NoteStatus.loaded));
   }
 
