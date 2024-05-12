@@ -14,7 +14,7 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
   final NoteEntity? noteEntity;
 
   NoteBloc(this._noteRepository, this.noteEntity) : super(NoteState()) {
-    // on<NoteClearEvent>(_onNoteClear);
+    on<NoteClearEvent>(_onNoteClear);
     on<NoteLoadEvent>(_onNoteLoadEvent);
     on<NoteChangedEvent>(_onNoteChanged);
     on<TitleChangedEvent>(_onTitleChanged);
@@ -26,6 +26,7 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
       NoteLoadEvent event, Emitter<NoteState> emit) async {
     if (noteEntity != null) {
       emit(state.copyWith(
+        isUpdate: true,
         title: noteEntity!.title,
         note: noteEntity!.description,
         color: Color(int.parse(noteEntity!.color)),
@@ -34,17 +35,19 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     emit(state.copyWith(noteStatus: NoteStatus.loaded));
   }
 
-  // Future<void> _onNoteClear(
-  //     NoteClearEvent event, Emitter<NoteState> emit) async {
-  //   emit(state.copyWith(noteStatus: NoteStatus.loading));
-  //   final clearNote = await _noteRepository.clearNote();
-  //   clearNote
-  //       .fold((failure) => emit(state.copyWith(noteStatus: NoteStatus.failure)),
-  //           (result) {
-  //     emit(state.copyWith(noteStatus: NoteStatus.cleared));
-  //     add(NoteLoadEvent());
-  //   });
-  // }
+  Future<void> _onNoteClear(
+      NoteClearEvent event, Emitter<NoteState> emit) async {
+    emit(state.copyWith(noteStatus: NoteStatus.loading));
+    if (noteEntity != null) {
+      final clearNote = await _noteRepository.deleteNote(noteEntity!.id);
+      clearNote.fold(
+          (failure) => emit(state.copyWith(noteStatus: NoteStatus.failure)),
+          (result) {
+        emit(state.copyWith(noteStatus: NoteStatus.cleared));
+        add(NoteLoadEvent());
+      });
+    }
+  }
 
   void _onColorChanged(ColorChangedEvent event, Emitter<NoteState> emit) {
     debugPrint("Color: ${event.color.toString()}");

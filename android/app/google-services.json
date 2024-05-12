@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "651579985912",
+    "project_id": "task-calendar-1b642",
+    "storage_bucket": "task-calendar-1b642.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:651579985912:android:78f39e3df15abafbe8500d",
+        "android_client_info": {
+          "package_name": "com.mashkrap.taskcalendar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB46IlAaSNme72kidE02tigDtfIU-LnfWU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

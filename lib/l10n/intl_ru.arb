@@ -48,8 +48,8 @@
   "enterTheTextOfTheNote": "Введите текст заметки",
   "deleted": "Удалено",
   "emptyNoteList": "Вы можете добавить заметку, нажав на кнопку \"+\" ниже",
-  "theNoteWasNotFound": "Записка не была найдена",
+  "theNoteWasNotFound": "Заметка не была найдена",
   "startTyping": "Начните ввод",
   "titleNote": "Заголовок",
-  "selectColor": "Select color"
+  "selectColor": "Выберите цвет"
 }

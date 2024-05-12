@@ -5,9 +5,10 @@ class ShowUp extends StatefulWidget {
   final Widget child;
   final int delay;
 
-  ShowUp({required this.child, required this.delay});
+  const ShowUp({super.key, required this.child, required this.delay});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ShowUpState createState() => _ShowUpState();
 }
 

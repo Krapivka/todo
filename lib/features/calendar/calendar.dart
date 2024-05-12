@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:todo/core/data/models/task.dart';
 import 'package:todo/core/domain/repositories/task_repository.dart';
 import 'package:todo/core/services/ads/yandex_ads/banner/banner_ad.dart';
@@ -86,6 +87,13 @@ class _CalendarPageViewState extends State<CalendarPageView> {
                   CalendarFormat.twoWeeks: S.of(context).twoWeeks,
                   CalendarFormat.week: S.of(context).week
                 },
+                headerStyle: HeaderStyle(
+                  titleTextFormatter: (date, locale) {
+                    final title = DateFormat.yMMM(locale).format(date);
+                    return title[0].toUpperCase() + title.substring(1);
+                  },
+                  formatButtonVisible: true,
+                ),
                 selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
                 calendarFormat: _calendarFormat,
                 rangeSelectionMode: _rangeSelectionMode,

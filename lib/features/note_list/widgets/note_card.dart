@@ -46,52 +46,50 @@ class _NoteCardState extends State<NoteCard> {
         return AnimatedOpacity(
           opacity: _visible ? 1 : 0,
           duration: const Duration(milliseconds: 200),
-          child: Container(
-            child: Material(
-              elevation: 2,
+          child: Material(
+            elevation: 2,
+            borderRadius: BorderRadius.circular(20),
+            child: InkWell(
               borderRadius: BorderRadius.circular(20),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(20),
-                onTap: () {
-                  if (state.selectedNoteId.isEmpty) {
-                    AutoRouter.of(context).push(NoteRoute(note: widget.note));
-                  } else {
-                    noteListBloc.add(TapNoteCardEvent(id: widget.note.id));
-                  }
-                },
-                onLongPress: () {
-                  noteListBloc.add(LongPressNoteCardEvent(id: widget.note.id));
-                },
-                child: Ink(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: noteListBloc.state.selectedNoteId
-                            .contains(widget.note.id)
-                        ? Color.fromARGB(255, 190, 190, 190)
-                        : Color(int.parse(widget.note.color)).withOpacity(0.5),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.note.title == ""
-                              ? (widget.note.description.split(" "))[0]
-                              : widget.note.title,
-                          style: const TextStyle(
-                            fontSize: 20,
-                          ),
-                          maxLines: 2,
+              onTap: () {
+                if (state.selectedNoteId.isEmpty) {
+                  AutoRouter.of(context).push(NoteRoute(note: widget.note));
+                } else {
+                  noteListBloc.add(TapNoteCardEvent(id: widget.note.id));
+                }
+              },
+              onLongPress: () {
+                noteListBloc.add(LongPressNoteCardEvent(id: widget.note.id));
+              },
+              child: Ink(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: noteListBloc.state.selectedNoteId
+                          .contains(widget.note.id)
+                      ? const Color.fromARGB(255, 190, 190, 190)
+                      : Color(int.parse(widget.note.color)).withOpacity(0.5),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.note.title == ""
+                            ? (widget.note.description.split(" "))[0]
+                            : widget.note.title,
+                        style: const TextStyle(
+                          fontSize: 20,
                         ),
-                        Text(
-                          widget.note.description,
-                          maxLines: 5,
-                        ),
-                        Text(DateTimeUtils.formatDate(widget.note.dateTime,
-                            settingsBloc.state.dateFormat))
-                      ],
-                    ),
+                        maxLines: 2,
+                      ),
+                      Text(
+                        widget.note.description,
+                        maxLines: 5,
+                      ),
+                      Text(DateTimeUtils.formatDate(
+                          widget.note.dateTime, settingsBloc.state.dateFormat))
+                    ],
                   ),
                 ),
               ),

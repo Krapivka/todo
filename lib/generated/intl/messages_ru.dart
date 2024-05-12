@@ -85,7 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "В какое время хотите получать уведомления?"),
         "save": MessageLookupByLibrary.simpleMessage("Сохранить"),
         "search": MessageLookupByLibrary.simpleMessage("Поиск"),
-        "selectColor": MessageLookupByLibrary.simpleMessage("Select color"),
+        "selectColor": MessageLookupByLibrary.simpleMessage("Выберите цвет"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "startTyping": MessageLookupByLibrary.simpleMessage("Начните ввод"),
         "systemThemeModeName":
@@ -96,7 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "theNoteIsSaved":
             MessageLookupByLibrary.simpleMessage("Заметка сохранена"),
         "theNoteWasNotFound":
-            MessageLookupByLibrary.simpleMessage("Записка не была найдена"),
+            MessageLookupByLibrary.simpleMessage("Заметка не была найдена"),
         "theme": MessageLookupByLibrary.simpleMessage("Тема"),
         "thisIsATestNotificationItsAllRight":
             MessageLookupByLibrary.simpleMessage(

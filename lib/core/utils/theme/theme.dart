@@ -1,61 +1,84 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:todo/core/utils/constants/Palette.dart';
 import 'package:flutter/material.dart';
 
-String _fontFamily = 'Montserrat';
+// String _fontFamily = 'Lato';
+TextTheme? textTheme = GoogleFonts.latoTextTheme();
+TextTheme? darkTextTheme = GoogleFonts.latoTextTheme().copyWith(
+  bodyMedium:
+      GoogleFonts.lato(textStyle: const TextStyle(color: Palette.primaryLight)),
+  bodyLarge:
+      GoogleFonts.lato(textStyle: const TextStyle(color: Palette.primaryLight)),
+  bodySmall:
+      GoogleFonts.lato(textStyle: const TextStyle(color: Palette.primaryLight)),
+  titleLarge:
+      GoogleFonts.lato(textStyle: const TextStyle(color: Palette.primaryLight)),
+  titleMedium:
+      GoogleFonts.lato(textStyle: const TextStyle(color: Palette.primaryLight)),
+  titleSmall:
+      GoogleFonts.lato(textStyle: const TextStyle(color: Palette.primaryLight)),
+  labelLarge:
+      GoogleFonts.lato(textStyle: const TextStyle(color: Palette.primaryLight)),
+  labelMedium:
+      GoogleFonts.lato(textStyle: const TextStyle(color: Palette.primaryLight)),
+  labelSmall:
+      GoogleFonts.lato(textStyle: const TextStyle(color: Palette.primaryLight)),
+);
 
 ThemeData lightTheme = ThemeData(
-  useMaterial3: true,
-  brightness: Brightness.light,
-  colorScheme: const ColorScheme.light(
-    background: Palette.backgroundLight,
-    primary: Palette.primaryLight,
-    secondary: Palette.secondaryLight,
-  ),
-  textSelectionTheme: const TextSelectionThemeData(
-    cursorColor: Palette.secondaryDark,
-    selectionHandleColor: Palette.primaryAccent,
-    selectionColor: Palette.primaryAccent,
-  ),
-  scaffoldBackgroundColor: Palette.backgroundLight,
-  // appBarTheme: const AppBarTheme(
-  //   color: Palette.primaryLight,
-  // ),
-  // bottomAppBarTheme: const BottomAppBarTheme(
-  //   color: Palette.primaryLight,
-  // ),
-  // floatingActionButtonTheme: const FloatingActionButtonThemeData(
-  //   backgroundColor: Palette.secondaryLight,
-  // ),
-  // iconTheme: IconThemeData(color: Palette.textLight),
-  floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: Palette.secondaryAccent),
-  fontFamily: _fontFamily,
-);
+    useMaterial3: true,
+    brightness: Brightness.light,
+    colorScheme: const ColorScheme.light(
+      background: Palette.backgroundLight,
+      primary: Palette.primaryLight,
+      secondary: Palette.secondaryLight,
+    ),
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: Palette.secondaryDark,
+      selectionHandleColor: Palette.primaryAccent,
+      selectionColor: Palette.primaryAccent,
+    ),
+    scaffoldBackgroundColor: Palette.backgroundLight,
+
+    // appBarTheme: const AppBarTheme(
+    //   color: Palette.primaryLight,
+    // ),
+    // bottomAppBarTheme: const BottomAppBarTheme(
+    //   color: Palette.primaryLight,
+    // ),
+    // floatingActionButtonTheme: const FloatingActionButtonThemeData(
+    //   backgroundColor: Palette.secondaryLight,
+    // ),
+    // iconTheme: IconThemeData(color: Palette.textLight),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: Palette.secondaryAccent),
+    // fontFamily: _fontFamily,
+    textTheme: textTheme);
 
 ThemeData darkTheme = ThemeData(
-  useMaterial3: true,
-  brightness: Brightness.dark,
-  colorScheme: const ColorScheme.dark(
-    background: Palette.backgroundDark,
-    primary: Palette.primaryDark,
-    secondary: Palette.secondaryDark,
-  ),
-  textSelectionTheme: const TextSelectionThemeData(
-    cursorColor: Palette.secondaryLight,
-    selectionHandleColor: Palette.primaryAccent,
-    selectionColor: Palette.primaryAccent,
-  ),
-  // appBarTheme: const AppBarTheme(
-  //   color: Palette.primaryDark,
-  // ),
-  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-    backgroundColor: Palette.primaryDark,
-  ),
-  appBarTheme: const AppBarTheme(backgroundColor: Palette.backgroundDark),
-  floatingActionButtonTheme: const FloatingActionButtonThemeData(
-      backgroundColor: Palette.primaryAccent),
-  fontFamily: _fontFamily,
-);
+    useMaterial3: true,
+    brightness: Brightness.dark,
+    colorScheme: const ColorScheme.dark(
+      background: Palette.backgroundDark,
+      primary: Palette.primaryDark,
+      secondary: Palette.secondaryDark,
+    ),
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: Palette.secondaryLight,
+      selectionHandleColor: Palette.primaryAccent,
+      selectionColor: Palette.primaryAccent,
+    ),
+    // appBarTheme: const AppBarTheme(
+    //   color: Palette.primaryDark,
+    // ),
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: Palette.primaryDark,
+    ),
+    appBarTheme: const AppBarTheme(backgroundColor: Palette.backgroundDark),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: Palette.primaryAccent),
+    //  fontFamily: _fontFamily,
+    textTheme: darkTextTheme);
 
 
 //   useMaterial3: true,

@@ -24,9 +24,7 @@ class NoteSearch extends StatelessWidget {
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.search),
           suffixIcon: BlocConsumer<NotesListBloc, NotesListState>(
-            listener: (context, state) {
-              // TODO: implement listener
-            },
+            listener: (context, state) {},
             builder: (context, state) {
               if (state.noteListStatus == NotesListStatus.searchLoaded) {
                 return IconButton(

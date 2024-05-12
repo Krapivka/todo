@@ -1,4 +1,3 @@
-import 'package:todo/core/data/repositories/note_repository_impl.dart';
 import 'package:todo/core/domain/repositories/note_repository.dart';
 import 'package:todo/core/domain/repositories/task_repository.dart';
 
@@ -13,7 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-late final windowSize;
+late final Size windowSize;
 
 class App extends StatelessWidget {
   final AbstractTaskRepository taskRepository;
@@ -57,13 +56,13 @@ class App extends StatelessWidget {
                             context))
                   ..add(const InitializeSettingsEvent())),
           ],
-          child: AppView(),
+          child: const AppView(),
         ));
   }
 }
 
 class AppView extends StatefulWidget {
-  AppView({
+  const AppView({
     super.key,
   });
 

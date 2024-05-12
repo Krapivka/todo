@@ -6,14 +6,13 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../settings/data/repository/abstract_settings_repository.dart';
-
 part 'note_list_event.dart';
 part 'note_list_state.dart';
 
 class NotesListBloc extends Bloc<NotesListEvent, NotesListState> {
-  NotesListBloc(this._noteRepository, this._settingsRepository)
-      : super(
+  NotesListBloc(
+    this._noteRepository,
+  ) : super(
           const NotesListState(
             noteListStatus: NotesListStatus.initial,
             listNoteModel: [],
@@ -29,7 +28,6 @@ class NotesListBloc extends Bloc<NotesListEvent, NotesListState> {
     on<ChangeNoteCompleteListEvent>(_onChangeNoteComplete);
   }
   final AbstractNoteRepository _noteRepository;
-  final AbstractSettingsRepository _settingsRepository;
 
   _onLoadNotesList(
       LoadNotesListEvent event, Emitter<NotesListState> emit) async {
@@ -40,7 +38,7 @@ class NotesListBloc extends Bloc<NotesListEvent, NotesListState> {
           emit(state.copyWith(noteListStatus: NotesListStatus.failure)),
       (result) => emit(state.copyWith(
           noteListStatus: NotesListStatus.loaded,
-          listNoteModel: sortNotesByNearestNote(result as List<NoteModel>))),
+          listNoteModel: sortByDate(result as List<NoteModel>))),
     );
   }
 
@@ -55,7 +53,7 @@ class NotesListBloc extends Bloc<NotesListEvent, NotesListState> {
       if (result.isEmpty || event.query == '') {
         emit(state.copyWith(
             noteListStatus: NotesListStatus.loaded,
-            listNoteModel: sortNotesByNearestNote(result as List<NoteModel>)));
+            listNoteModel: sortByDate(result as List<NoteModel>)));
       } else {
         final query = event.query;
 
@@ -69,8 +67,7 @@ class NotesListBloc extends Bloc<NotesListEvent, NotesListState> {
         emit(
           state.copyWith(
               noteListStatus: NotesListStatus.searchLoaded,
-              sortedListNoteModel:
-                  sortNotesByNearestNote(sortedList as List<NoteModel>)),
+              sortedListNoteModel: sortByDate(sortedList as List<NoteModel>)),
         );
       }
     });
@@ -112,7 +109,7 @@ class NotesListBloc extends Bloc<NotesListEvent, NotesListState> {
         emit(state.copyWith(
             selectedNoteId: [],
             noteListStatus: NotesListStatus.selectedNotesDeleted));
-        debugPrint("Delete Note with ID: ${id}");
+        debugPrint("Delete Note with ID: $id");
       });
     }
 
@@ -138,24 +135,7 @@ class NotesListBloc extends Bloc<NotesListEvent, NotesListState> {
   }
 }
 
-List<NoteModel> sortNotesByNearestNote(List<NoteModel> notes) {
-  DateTime today = DateTime.now();
-  DateTime yesterday = today.subtract(Duration(days: 1));
-
-  notes.sort((a, b) {
-    DateTime aNextNote = DateTime(today.year, a.dateTime.month, a.dateTime.day);
-    DateTime bNextNote = DateTime(today.year, b.dateTime.month, b.dateTime.day);
-    if (aNextNote.isBefore(yesterday)) {
-      aNextNote = aNextNote.add(const Duration(days: 365));
-    }
-    if (bNextNote.isBefore(yesterday)) {
-      bNextNote = bNextNote.add(const Duration(days: 365));
-    }
-    int result = aNextNote.compareTo(bNextNote);
-    if (result == 0) {
-      result = a.id.compareTo(b.id);
-    }
-    return result;
-  });
+List<NoteModel> sortByDate(List<NoteModel> notes) {
+  notes.sort((a, b) => b.dateTime.compareTo(a.dateTime));
   return notes;
 }

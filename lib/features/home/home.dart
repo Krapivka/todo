@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:todo/core/domain/repositories/note_repository.dart';
 import 'package:todo/core/domain/repositories/task_repository.dart';
-import 'package:todo/features/note/bloc/note_bloc.dart';
 import 'package:todo/features/note_list/bloc/note_list_bloc.dart';
 import 'package:todo/features/note_list/note_list.dart';
 import 'package:todo/features/todo_list/todo_list.dart';
@@ -31,8 +30,8 @@ class HomePage extends StatelessWidget {
       ),
       BlocProvider(
         create: (context) => NotesListBloc(
-            RepositoryProvider.of<AbstractNoteRepository>(context),
-            RepositoryProvider.of<AbstractSettingsRepository>(context)),
+          RepositoryProvider.of<AbstractNoteRepository>(context),
+        ),
       )
     ], child: const HomeView());
   }

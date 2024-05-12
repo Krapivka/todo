@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:todo/core/services/ads/ads_config.dart';
 import 'package:todo/todo_app.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -11,9 +12,9 @@ part 'yandex_ads_state.dart';
 
 class YandexAdsBloc extends Bloc<YandexAdsEvent, YandexAdsState> {
   YandexAdsBloc()
-      : super(const YandexAdsState(
-          adUnitId: "",
-          adRequest: AdRequest(),
+      : super(YandexAdsState(
+          adUnitId: AdsConfig.bannerId,
+          adRequest: const AdRequest(),
           status: YandexAdsStatus.initial,
           banner: null,
         )) {

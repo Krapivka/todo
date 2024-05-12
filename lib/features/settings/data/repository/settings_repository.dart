@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todo/core/error/exception.dart';
 import 'package:todo/core/error/failure.dart';
 import 'package:todo/features/settings/data/datasource/settings_local_data_source.dart';
 import 'package:todo/features/settings/data/models/day_time_notification.dart';

@@ -7,6 +7,7 @@ class CalendarState extends Equatable {
     this.status = CalendarStatus.initial,
     tasks,
     tasksInSelectedDay,
+    // ignore: prefer_collection_literals
   })  : tasks = tasks ?? LinkedHashMap<DateTime, List<TaskModel>>(),
         tasksInSelectedDay = tasksInSelectedDay ?? [];
 

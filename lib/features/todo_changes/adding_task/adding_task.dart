@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/widgets.dart';
 import 'package:todo/core/domain/repositories/task_repository.dart';
 import 'package:todo/core/utils/components/action_button.dart';
 import 'package:todo/core/utils/constants/Palette.dart';
@@ -116,7 +115,7 @@ class AddingTaskView extends StatelessWidget {
 }
 
 class _ButtonAddTask extends StatelessWidget {
-  const _ButtonAddTask({super.key});
+  const _ButtonAddTask();
 
   @override
   Widget build(BuildContext context) {

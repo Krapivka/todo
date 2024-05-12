@@ -24,9 +24,7 @@ class TaskSearch extends StatelessWidget {
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.search),
           suffixIcon: BlocConsumer<TasksListBloc, TasksListState>(
-            listener: (context, state) {
-              // TODO: implement listener
-            },
+            listener: (context, state) {},
             builder: (context, state) {
               if (state.taskListStatus == TasksListStatus.searchLoaded) {
                 return IconButton(

@@ -117,7 +117,7 @@ class TasksListBloc extends Bloc<TasksListEvent, TasksListState> {
         ///Cancel scheduling notifications
 
         await AwesomeNotifications().cancel(id);
-        debugPrint("Delete Task with ID: ${id}");
+        debugPrint("Delete Task with ID: $id");
       });
     }
     emit(state.copyWith(
@@ -167,7 +167,7 @@ class TasksListBloc extends Bloc<TasksListEvent, TasksListState> {
 
 List<TaskModel> sortTasksByNearestTask(List<TaskModel> tasks) {
   DateTime today = DateTime.now();
-  DateTime yesterday = today.subtract(Duration(days: 1));
+  DateTime yesterday = today.subtract(const Duration(days: 1));
 
   tasks.sort((a, b) {
     DateTime aNextTask = DateTime(today.year, a.dateTime.month, a.dateTime.day);

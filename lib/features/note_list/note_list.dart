@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:todo/core/domain/enteties/note_entity.dart';
 import 'package:todo/core/services/ads/yandex_ads/banner/banner_ad.dart';

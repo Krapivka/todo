@@ -183,7 +183,7 @@ class UpdateTaskPageView extends StatelessWidget {
 // }
 
 class _ButtonSaveTask extends StatelessWidget {
-  const _ButtonSaveTask({super.key});
+  const _ButtonSaveTask();
 
   @override
   Widget build(BuildContext context) {

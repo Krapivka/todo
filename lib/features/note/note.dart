@@ -14,7 +14,7 @@ import '../../core/services/ads/yandex_ads/banner/banner_ad.dart';
 
 @RoutePage()
 class NotePage extends StatelessWidget {
-  NotePage({
+  const NotePage({
     super.key,
     this.note,
   });
@@ -29,6 +29,7 @@ class NotePage extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class NoteView extends StatelessWidget {
   NoteView({super.key});
   TextEditingController noteTitleController = TextEditingController();
@@ -51,6 +52,16 @@ class NoteView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             actions: [
+              state.isUpdate
+                  ? IconButton(
+                      onPressed: () async {
+                        bloc.add(NoteClearEvent());
+                        AutoRouter.of(context).pushNamed("/");
+                      },
+                      icon: const Icon(
+                        Icons.delete,
+                      ))
+                  : const SizedBox(),
               IconButton(
                   onPressed: () async {
                     showDialog(
@@ -66,13 +77,6 @@ class NoteView extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              // actions: <Widget>[
-                              //   ActionButton(text: 'Change color'),
-
-                              //   //     Navigator.of(context).pop();
-                              //   //   },
-                              //   // ),
-                              // ],
                             ));
                   },
                   icon: Icon(
@@ -88,7 +92,6 @@ class NoteView extends StatelessWidget {
                 const BannerAdWidget(
                   isSticky: true,
                 ),
-
                 TextField(
                   controller: noteTitleController,
                   onChanged: (title) {
@@ -111,37 +114,27 @@ class NoteView extends StatelessWidget {
                   ],
                 ),
                 Expanded(
-                  child: Container(
-                    child: TextField(
-                      controller: noteDescController,
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      onChanged: (value) {
-                        BlocProvider.of<NoteBloc>(context)
-                            .add(NoteChangedEvent(note: value));
-                      },
-                      enableInteractiveSelection: true,
-                      decoration: InputDecoration(
-                        hintText: S.of(context).startTyping,
-                        border: InputBorder.none,
-                      ),
-                      style: const TextStyle(fontSize: 18),
+                  child: TextField(
+                    controller: noteDescController,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    onChanged: (value) {
+                      BlocProvider.of<NoteBloc>(context)
+                          .add(NoteChangedEvent(note: value));
+                    },
+                    enableInteractiveSelection: true,
+                    decoration: InputDecoration(
+                      hintText: S.of(context).startTyping,
+                      border: InputBorder.none,
                     ),
+                    style: const TextStyle(fontSize: 18),
                   ),
                 ),
-
-                // child: TextFieldTaskChanges(
-                //   controller: noteController,
-                //   hintText: S.of(context).enterTheTextOfTheNote,
-                //   onChanged: (value) {
-                //     // BlocProvider.of<NoteBloc>(context)
-                //     //     .add(NoteChangedEvent(note: value));
-                //   }, Start typing
-                // ),
-
-                const Padding(
-                  padding: EdgeInsets.all(12.0),
-                  child: _ButtonAddNote(),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: state.isUpdate
+                      ? _ButtonAddNote(title: S.of(context).save)
+                      : _ButtonAddNote(title: S.of(context).addTaskButton),
                 ),
               ],
             ),
@@ -154,8 +147,8 @@ class NoteView extends StatelessWidget {
 }
 
 class _ButtonAddNote extends StatelessWidget {
-  const _ButtonAddNote({super.key});
-
+  const _ButtonAddNote({required this.title});
+  final String title;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -163,59 +156,7 @@ class _ButtonAddNote extends StatelessWidget {
           context.read<NoteBloc>().add(const NoteSaveEvent());
         },
         child: ActionButton(
-          text: S.of(context).addTaskButton,
+          text: title,
         ));
   }
 }
-
-// class NoteView extends StatelessWidget {
-//   NoteView({super.key});
-//   TextEditingController noteController = TextEditingController();
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final bloc = BlocProvider.of<NoteBloc>(context);
-//     bloc.add(NoteLoadEvent());
-
-//     return Padding(
-//       padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
-//       child: Column(
-//         children: [
-//           const BannerAdWidget(
-//             isSticky: true,
-//           ),
-//           Expanded(
-//             child: BlocConsumer<NoteBloc, NoteState>(
-//               listener: (context, state) {
-//                 if (state.noteStatus == NoteStatus.loaded) {
-//                   noteController.text = bloc.state.note;
-//                 }
-//                 if (state.noteStatus == NoteStatus.saved) {
-//                   ScaffoldMessenger.of(context).showSnackBar(
-//                       AppSnackBar.getSnackBar(S.of(context).theNoteIsSaved));
-//                 }
-//                 if (state.noteStatus == NoteStatus.cleared) {
-//                   ScaffoldMessenger.of(context).showSnackBar(
-//                       AppSnackBar.getSnackBar(S.of(context).deleted));
-//                 }
-//               },
-//               builder: (context, state) {
-//                 return BlocBuilder<NoteBloc, NoteState>(
-//                     builder: (context, state) {
-//                   return TextFieldTaskChanges(
-//                     controller: noteController,
-//                     hintText: S.of(context).enterTheTextOfTheNote,
-//                     onChanged: (value) {
-//                       BlocProvider.of<NoteBloc>(context)
-//                           .add(NoteChangedEvent(note: value));
-//                     },
-//                   );
-//                 });
-//               },
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
