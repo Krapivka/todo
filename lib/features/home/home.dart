@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:todo/core/domain/repositories/note_repository.dart';
 import 'package:todo/core/domain/repositories/task_repository.dart';
+import 'package:todo/features/calendar/bloc/bloc/calendar_bloc.dart';
 import 'package:todo/features/note_list/bloc/note_list_bloc.dart';
 import 'package:todo/features/note_list/note_list.dart';
 import 'package:todo/features/todo_list/todo_list.dart';
@@ -32,7 +33,11 @@ class HomePage extends StatelessWidget {
         create: (context) => NotesListBloc(
           RepositoryProvider.of<AbstractNoteRepository>(context),
         ),
-      )
+      ),
+      BlocProvider(
+        create: (context) => CalendarBloc(
+            RepositoryProvider.of<AbstractTaskRepository>(context)),
+      ),
     ], child: const HomeView());
   }
 }
@@ -128,13 +133,26 @@ class HomeView extends StatelessWidget {
                 child: const Icon(
                   Icons.add,
                 ))
-            : FloatingActionButton(
-                onPressed: () {
-                  AutoRouter.of(context).push(const AddingTaskRoute());
-                },
-                child: const Icon(
-                  Icons.add,
-                )),
+            : selectedTab.index == 1
+                ? FloatingActionButton(
+                    onPressed: () {
+                      AutoRouter.of(context).push(AddingTaskRoute());
+                    },
+                    child: const Icon(
+                      Icons.add,
+                    ))
+                : FloatingActionButton(
+                    onPressed: () {
+                      final selDay = BlocProvider.of<CalendarBloc>(context)
+                          .state
+                          .selectedDay;
+                      print(selDay);
+                      AutoRouter.of(context)
+                          .push(AddingTaskRoute(dateTimeCalendar: selDay));
+                    },
+                    child: const Icon(
+                      Icons.add,
+                    )),
         body: IndexedStack(
           index: selectedTab.index,
           children: const [

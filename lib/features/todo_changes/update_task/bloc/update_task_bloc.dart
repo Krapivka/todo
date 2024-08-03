@@ -22,7 +22,6 @@ class UpdateTaskBloc extends Bloc<UpdateTaskEvent, UpdateTaskState> {
 
   final AbstractTaskRepository _taskRepository;
   final AbstractSettingsRepository _settingsRepository;
-
   void _onNameChanged(
       UpdateTaskTitleChanged event, Emitter<UpdateTaskState> emit) {
     debugPrint("Name: ${event.title}");
@@ -66,7 +65,7 @@ class UpdateTaskBloc extends Bloc<UpdateTaskEvent, UpdateTaskState> {
             description: state.description,
             title: state.title,
             dateTime: state.dateTime,
-            isCompleted: false);
+            isCompleted: state.isCompleted);
 
         final updateTask = await _taskRepository.updateTask(task);
         updateTask.fold(
@@ -76,20 +75,22 @@ class UpdateTaskBloc extends Bloc<UpdateTaskEvent, UpdateTaskState> {
           await AwesomeNotifications().cancel(task.id).then((value) =>
               debugPrint("Notification with ID ${task.id} canceled"));
           //scheduling notification
-          final notificationInterval =
-              await _settingsRepository.getNotificationDayTime();
-          notificationInterval.fold(
-              (failure) =>
-                  emit(state.copyWith(status: UpdateTaskStatus.failure)),
-              (result) async {
-            final taskTime = state.dateTime;
-            await NotificationService.scheduleTaskNotification(
-                task: task,
-                id: task.id,
-                dateTime: taskTime,
-                hourNotif: result.hour,
-                minuteNotif: result.minute);
-          });
+          if (!task.isCompleted) {
+            final notificationInterval =
+                await _settingsRepository.getNotificationDayTime();
+            notificationInterval.fold(
+                (failure) =>
+                    emit(state.copyWith(status: UpdateTaskStatus.failure)),
+                (result) async {
+              final taskTime = state.dateTime;
+              await NotificationService.scheduleTaskNotification(
+                  task: task,
+                  id: task.id,
+                  dateTime: taskTime,
+                  hourNotif: result.hour,
+                  minuteNotif: result.minute);
+            });
+          }
         });
         debugPrint("Update Task with id: ${task.id}");
         emit(state.copyWith(status: UpdateTaskStatus.success));

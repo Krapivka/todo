@@ -47,11 +47,12 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       CalendarDateTap event, Emitter<CalendarState> emit) async {
     emit(state.copyWith(status: CalendarStatus.loading));
     final List<TaskModel> tasksInSelectedDay =
-        state.tasks[event.birthdate] ?? [];
+        state.tasks[event.selectedDay] ?? [];
 
     emit(state.copyWith(
         status: CalendarStatus.success,
-        tasksInSelectedDay: tasksInSelectedDay));
+        tasksInSelectedDay: tasksInSelectedDay,
+        selectedDay: event.selectedDay));
   }
 }
 

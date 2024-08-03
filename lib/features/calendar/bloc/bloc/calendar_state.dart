@@ -7,12 +7,15 @@ class CalendarState extends Equatable {
     this.status = CalendarStatus.initial,
     tasks,
     tasksInSelectedDay,
+    selectedDay,
     // ignore: prefer_collection_literals
   })  : tasks = tasks ?? LinkedHashMap<DateTime, List<TaskModel>>(),
-        tasksInSelectedDay = tasksInSelectedDay ?? [];
+        tasksInSelectedDay = tasksInSelectedDay ?? [],
+        selectedDay = selectedDay ?? DateTime.now();
 
   final LinkedHashMap<DateTime, List<TaskModel>> tasks;
   final List<TaskModel> tasksInSelectedDay;
+  final DateTime selectedDay;
   final CalendarStatus status;
   final DateTime today = DateTime.now();
 
@@ -27,11 +30,13 @@ class CalendarState extends Equatable {
   CalendarState copyWith({
     LinkedHashMap<DateTime, List<TaskModel>>? tasks,
     List<TaskModel>? tasksInSelectedDay,
+    DateTime? selectedDay,
     CalendarStatus? status,
   }) {
     return CalendarState(
       status: status ?? this.status,
       tasks: tasks ?? this.tasks,
+      selectedDay: selectedDay ?? this.selectedDay,
       tasksInSelectedDay: tasksInSelectedDay ?? this.tasksInSelectedDay,
     );
   }

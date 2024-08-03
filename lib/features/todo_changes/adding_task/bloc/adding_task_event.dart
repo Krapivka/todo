@@ -32,13 +32,13 @@ class AddingTaskDescriptionChanged extends AddingTaskEvent {
 //   List<Object> get props => [];
 // }
 
-class AddingTaskDateTap extends AddingTaskEvent {
-  const AddingTaskDateTap(this.dateTime);
+class AddingTaskDateChanged extends AddingTaskEvent {
+  const AddingTaskDateChanged(this.dateTime);
 
-  final DateTime dateTime;
+  final DateTime? dateTime;
 
   @override
-  List<Object> get props => [dateTime];
+  List<Object> get props => [];
 }
 
 final class AddingTaskSubmitted extends AddingTaskEvent {

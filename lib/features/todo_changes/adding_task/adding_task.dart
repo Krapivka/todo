@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:todo/core/domain/repositories/task_repository.dart';
 import 'package:todo/core/utils/components/action_button.dart';
 import 'package:todo/core/utils/constants/Palette.dart';
+import 'package:todo/core/utils/date_utils/date_utils.dart';
 import 'package:todo/core/utils/snack_bar/snack_bar.dart';
 import 'package:todo/features/todo_changes/adding_task/bloc/adding_task_bloc.dart';
 import 'package:todo/features/todo_changes/widgets/text_field_todo_changes.dart';
@@ -14,14 +15,15 @@ import 'package:todo/router/router.dart';
 
 @RoutePage()
 class AddingTaskPage extends StatelessWidget {
-  const AddingTaskPage({super.key});
-
+  const AddingTaskPage({super.key, this.dateTimeCalendar});
+  final DateTime? dateTimeCalendar;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AddingTaskBloc(
         context.read<AbstractTaskRepository>(),
         context.read<AbstractSettingsRepository>(),
+        dateTimeCalendar,
       ),
       child: const AddingTaskView(),
     );
@@ -92,11 +94,12 @@ class AddingTaskView extends StatelessWidget {
                         ),
                         SizedBox(
                           height: 100,
-                          child:
-                              DatePicker(onDateTimeChanged: (DateTime value) {
-                            BlocProvider.of<AddingTaskBloc>(context)
-                                .add(AddingTaskDateTap(value));
-                          }),
+                          child: DatePicker(
+                            onDateTimeChanged: (DateTime value) {
+                              BlocProvider.of<AddingTaskBloc>(context)
+                                  .add(AddingTaskDateChanged(value));
+                            },
+                          ),
                         ),
                       ],
                     ),
@@ -133,11 +136,12 @@ class DatePicker extends StatelessWidget {
   const DatePicker({super.key, required this.onDateTimeChanged});
 
   final void Function(DateTime) onDateTimeChanged;
+
   @override
   Widget build(BuildContext context) {
-    final dateTimeNow = DateTime.now();
     return BlocBuilder<AddingTaskBloc, AddingTaskState>(
       builder: (context, state) {
+        DateTime? dateTimeNow = DateTime.now();
         return Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
@@ -155,7 +159,8 @@ class DatePicker extends StatelessWidget {
               ),
               mode: CupertinoDatePickerMode.dateAndTime,
               use24hFormat: true,
-              initialDateTime: state.dateTime,
+              initialDateTime:
+                  DateTimeUtils.combineDateAndTime(state.dateTime, dateTimeNow),
               onDateTimeChanged: onDateTimeChanged),
         );
       },

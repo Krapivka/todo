@@ -16,9 +16,14 @@ abstract class _$AppRouter extends RootStackRouter {
   @override
   final Map<String, PageFactory> pagesMap = {
     AddingTaskRoute.name: (routeData) {
+      final args = routeData.argsAs<AddingTaskRouteArgs>(
+          orElse: () => const AddingTaskRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const AddingTaskPage(),
+        child: AddingTaskPage(
+          key: args.key,
+          dateTimeCalendar: args.dateTimeCalendar,
+        ),
       );
     },
     DateFormatSelectionRoute.name: (routeData) {
@@ -91,16 +96,40 @@ abstract class _$AppRouter extends RootStackRouter {
 
 /// generated route for
 /// [AddingTaskPage]
-class AddingTaskRoute extends PageRouteInfo<void> {
-  const AddingTaskRoute({List<PageRouteInfo>? children})
-      : super(
+class AddingTaskRoute extends PageRouteInfo<AddingTaskRouteArgs> {
+  AddingTaskRoute({
+    Key? key,
+    DateTime? dateTimeCalendar,
+    List<PageRouteInfo>? children,
+  }) : super(
           AddingTaskRoute.name,
+          args: AddingTaskRouteArgs(
+            key: key,
+            dateTimeCalendar: dateTimeCalendar,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'AddingTaskRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<AddingTaskRouteArgs> page =
+      PageInfo<AddingTaskRouteArgs>(name);
+}
+
+class AddingTaskRouteArgs {
+  const AddingTaskRouteArgs({
+    this.key,
+    this.dateTimeCalendar,
+  });
+
+  final Key? key;
+
+  final DateTime? dateTimeCalendar;
+
+  @override
+  String toString() {
+    return 'AddingTaskRouteArgs{key: $key, dateTimeCalendar: $dateTimeCalendar}';
+  }
 }
 
 /// generated route for

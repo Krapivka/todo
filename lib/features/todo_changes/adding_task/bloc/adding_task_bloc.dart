@@ -12,17 +12,19 @@ part 'adding_task_event.dart';
 part 'adding_task_state.dart';
 
 class AddingTaskBloc extends Bloc<AddingTaskEvent, AddingTaskState> {
-  AddingTaskBloc(this._taskRepository, this._settingsRepository)
-      : super(AddingTaskState()) {
+  AddingTaskBloc(
+      this._taskRepository, this._settingsRepository, this.dateTimeCalendar)
+      : super(AddingTaskState(dateTime: dateTimeCalendar)) {
     on<AddingTaskTitleChanged>(_onNameChanged);
     on<AddingTaskDescriptionChanged>(_onDescriptionChanged);
-    on<AddingTaskDateTap>(_onDateTap);
+    on<AddingTaskDateChanged>(_onDateChanged);
     // on<AddingTaskImageTap>(_onImageTap);
     on<AddingTaskSubmitted>(_onSubmitted);
   }
 
   final AbstractTaskRepository _taskRepository;
   final AbstractSettingsRepository _settingsRepository;
+  final DateTime? dateTimeCalendar;
   //final AppImagePicker _imagePicker;
 
   // void _onImageTap(
@@ -44,7 +46,8 @@ class AddingTaskBloc extends Bloc<AddingTaskEvent, AddingTaskState> {
     emit(state.copyWith(description: event.description));
   }
 
-  void _onDateTap(AddingTaskDateTap event, Emitter<AddingTaskState> emit) {
+  void _onDateChanged(
+      AddingTaskDateChanged event, Emitter<AddingTaskState> emit) {
     debugPrint("Date: ${event.dateTime}");
     emit(state.copyWith(dateTime: event.dateTime));
   }

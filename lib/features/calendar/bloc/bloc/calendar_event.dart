@@ -8,12 +8,12 @@ abstract class CalendarEvent extends Equatable {
 }
 
 class CalendarDateTap extends CalendarEvent {
-  const CalendarDateTap(this.birthdate);
+  const CalendarDateTap(this.selectedDay);
 
-  final DateTime birthdate;
+  final DateTime selectedDay;
 
   @override
-  List<Object> get props => [birthdate];
+  List<Object> get props => [selectedDay];
 }
 
 class LoadTasksCalendar extends CalendarEvent {

@@ -37,6 +37,19 @@ class DateTimeUtils {
     return formattedDate;
   }
 
+  static DateTime combineDateAndTime(DateTime datePart, DateTime timePart) {
+    return DateTime(
+      datePart.year,
+      datePart.month,
+      datePart.day,
+      timePart.hour,
+      timePart.minute,
+      timePart.second,
+      timePart.millisecond,
+      timePart.microsecond,
+    );
+  }
+
   static String get defaultDateFormat => 'dd/MM/yyyy HH:mm';
 
   static List<String> get dateFormatList => [
