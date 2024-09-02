@@ -23,4 +23,7 @@ class Palette {
 
   //calendar
   static const Color markerColor = Color.fromARGB(255, 144, 177, 230);
+
+  static const Color successColor = Color.fromARGB(255, 58, 230, 149);
+  static const Color unfinishedColor = Colors.redAccent;
 }

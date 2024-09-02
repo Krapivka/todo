@@ -1,9 +1,8 @@
-import 'package:flutter/widgets.dart';
-import 'package:todo/core/utils/constants/Palette.dart';
 import 'package:flutter/material.dart';
 
 class AppSnackBar {
-  static SnackBar show(BuildContext context, String message) {
+  static SnackBar show(BuildContext context, String message, {Color? color}) {
+    final currentColor = color ?? Theme.of(context).colorScheme.primary;
     return SnackBar(
       padding: const EdgeInsets.symmetric(
         vertical: 8.0,
@@ -17,7 +16,7 @@ class AppSnackBar {
         message,
         style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
       ),
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: currentColor,
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo/core/utils/components/progress_indicator.dart';
+import 'package:todo/core/utils/constants/Palette.dart';
 import 'package:todo/core/utils/snack_bar/snack_bar.dart';
 import 'package:todo/features/backup_restore/bloc/google_drive_bloc.dart';
 import 'package:todo/features/backup_restore/bloc/google_drive_event.dart';
@@ -43,23 +44,29 @@ class BackupRestoreView extends StatelessWidget {
           if (state.status == GoogleDriveStatus.failure) {
             ScaffoldMessenger.of(context).showSnackBar(
               AppSnackBar.show(
-                  context, S.of(context).errorN(state.errorMessage ?? "")),
+                  context, S.of(context).errorN(state.errorMessage ?? ""),
+                  color: Palette.unfinishedColor),
             );
           } else if (state.status == GoogleDriveStatus.uploaded) {
             ScaffoldMessenger.of(context).showSnackBar(
               AppSnackBar.show(
-                  context, S.of(context).backupCompletedSuccessfully),
+                  context, S.of(context).backupCompletedSuccessfully,
+                  color: Palette.successColor),
             );
           } else if (state.status == GoogleDriveStatus.downloaded) {
             ScaffoldMessenger.of(context).showSnackBar(
               AppSnackBar.show(
-                  context, S.of(context).restoreCompletedSuccessfully),
+                  context, S.of(context).restoreCompletedSuccessfully,
+                  color: Palette.successColor),
             );
             AutoRouter.of(context).pushAndPopUntil(const HomeRoute(),
                 predicate: (Route<dynamic> route) => false);
           } else if (state.status == GoogleDriveStatus.loggedOut) {
             ScaffoldMessenger.of(context).showSnackBar(
-              AppSnackBar.show(context, S.of(context).loggedOutSuccessfully),
+              AppSnackBar.show(
+                context,
+                S.of(context).loggedOutSuccessfully,
+              ),
             );
             Navigator.pop(
                 context); // Возвращаемся на предыдущий экран после выхода
