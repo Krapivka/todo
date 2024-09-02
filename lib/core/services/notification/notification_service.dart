@@ -8,7 +8,8 @@ class NotificationService {
   ///Initialize Notification Channels for our app.
   ///Is notification allowed?
   static Future<void> initializeNotifications() async {
-    await AwesomeNotifications().initialize(null, [
+    await AwesomeNotifications()
+        .initialize("resource://drawable/launcher_icon", [
       NotificationChannel(
         channelGroupKey: "high_importance_channel_group",
         channelKey: "task_notification_in_day",
