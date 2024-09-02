@@ -26,6 +26,12 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    BackupRestoreRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BackupRestorePage(),
+      );
+    },
     DateFormatSelectionRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -130,6 +136,20 @@ class AddingTaskRouteArgs {
   String toString() {
     return 'AddingTaskRouteArgs{key: $key, dateTimeCalendar: $dateTimeCalendar}';
   }
+}
+
+/// generated route for
+/// [BackupRestorePage]
+class BackupRestoreRoute extends PageRouteInfo<void> {
+  const BackupRestoreRoute({List<PageRouteInfo>? children})
+      : super(
+          BackupRestoreRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BackupRestoreRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

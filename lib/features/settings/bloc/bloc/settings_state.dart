@@ -1,6 +1,6 @@
 part of 'settings_bloc.dart';
 
-enum SettingsStatus { initial, loading, success, failure }
+enum SettingsStatus { initial, loading, success, failure, login }
 
 class SettingsState extends Equatable {
   ///Field [dayTimeNotification] shows how many days are left before the task notification

@@ -51,5 +51,17 @@
   "notes": "Notes",
   "startTyping": "Start typing",
   "titleNote": "Title",
-  "selectColor": "Select color"
+  "selectColor": "Select color",
+  "backupOnGoogleDrive": "Backup on Google Drive",
+  "doNotLoseDataWhenChangingYourDevice": "Do not lose data when changing your device",
+  "createABackup": "Create a backup",
+  "logInToGoogleDrive": "Log in to Google Drive",
+  "backup": "Backup",
+  "recovery": "Recovery",
+  "logOutOfGoogleDrive": "Log out of Google Drive",
+  "googleDrive": "Google Drive",
+  "backupCompletedSuccessfully": "Backup completed successfully",
+  "restoreCompletedSuccessfully": "Restore completed successfully",
+  "loggedOutSuccessfully": "Logged out successfully",
+  "errorN": "Error: {errorMessage}"
 }

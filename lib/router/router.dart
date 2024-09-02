@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:todo/core/data/models/task.dart';
 import 'package:todo/core/domain/enteties/note_entity.dart';
+import 'package:todo/features/backup_restore/backup_restore.dart';
 import 'package:todo/features/home/home.dart';
 import 'package:todo/features/note/note.dart';
 import 'package:todo/features/settings/screens/data_format_selection.dart';
@@ -24,6 +25,8 @@ class AppRouter extends _$AppRouter {
         AutoRoute(path: '/update_task', page: UpdateTaskRoute.page),
         AutoRoute(path: '/add_task', page: AddingTaskRoute.page),
         AutoRoute(path: '/settings_list', page: SettingsRoute.page),
+        AutoRoute(
+            path: '/settings/backup_restore', page: BackupRestoreRoute.page),
         AutoRoute(
             path: '/settings/notification_selection',
             page: SettingsNotificationRoute.page),

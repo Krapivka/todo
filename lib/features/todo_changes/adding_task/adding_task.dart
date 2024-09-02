@@ -41,7 +41,7 @@ class AddingTaskView extends StatelessWidget {
       listener: (context, state) {
         if (state.status == AddingTaskStatus.validatorFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
-              AppSnackBar.getSnackBar(S.of(context).fillInTheRequiredFields));
+              AppSnackBar.show(context, S.of(context).fillInTheRequiredFields));
         }
         if (state.status == AddingTaskStatus.success) {
           AutoRouter.of(context).pushAndPopUntil(const HomeRoute(),

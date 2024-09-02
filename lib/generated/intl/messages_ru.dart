@@ -24,12 +24,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(author) => "Автор: ${author}";
 
-  static String m2(day, hour, minute) =>
+  static String m2(errorMessage) => "Ошибка: ${errorMessage}";
+
+  static String m3(day, hour, minute) =>
       "Уведомлять за ${day} дней в ${hour}:${minute}";
 
-  static String m3(dateTime) => "Уведомлять за ${dateTime} часов/минут";
+  static String m4(dateTime) => "Уведомлять за ${dateTime} часов/минут";
 
-  static String m4(nextAge) => "Исполняется ${nextAge}";
+  static String m5(nextAge) => "Исполняется ${nextAge}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -38,6 +40,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "addTaskButton": MessageLookupByLibrary.simpleMessage("Создать"),
         "appVersionN": m0,
         "authorN": m1,
+        "backup": MessageLookupByLibrary.simpleMessage("Резервная копия"),
+        "backupCompletedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Резервное копирование завершено успешно"),
+        "backupOnGoogleDrive": MessageLookupByLibrary.simpleMessage(
+            "Резервная копия на Google Диске"),
         "calendar": MessageLookupByLibrary.simpleMessage("Календарь"),
         "chooseDateFormat":
             MessageLookupByLibrary.simpleMessage("Выберите формат даты:"),
@@ -46,12 +53,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "chooseTheme": MessageLookupByLibrary.simpleMessage("Выбор темы"),
         "chooseYourLanguage":
             MessageLookupByLibrary.simpleMessage("Выберите язык:"),
+        "createABackup":
+            MessageLookupByLibrary.simpleMessage("Создать резервную копию"),
         "darkThemeModeName": MessageLookupByLibrary.simpleMessage("Темная"),
         "dateFormat": MessageLookupByLibrary.simpleMessage("Формат даты"),
         "daysShouldINotifyAboutTasks": MessageLookupByLibrary.simpleMessage(
             "За сколько дней уведомлять о задачах?"),
         "deleted": MessageLookupByLibrary.simpleMessage("Удалено"),
         "descriptionForTask": MessageLookupByLibrary.simpleMessage("Описание"),
+        "doNotLoseDataWhenChangingYourDevice":
+            MessageLookupByLibrary.simpleMessage(
+                "Не теряйте данные при смене устройства"),
         "emptyDayCalendar":
             MessageLookupByLibrary.simpleMessage("В этот день нет задач"),
         "emptyNoteList": MessageLookupByLibrary.simpleMessage(
@@ -62,8 +74,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Введите наименование"),
         "enterTheTextOfTheNote":
             MessageLookupByLibrary.simpleMessage("Введите текст заметки"),
+        "errorN": m2,
         "fillInTheRequiredFields":
             MessageLookupByLibrary.simpleMessage("Заполните обязательные поля"),
+        "googleDrive": MessageLookupByLibrary.simpleMessage("Google Диск"),
         "hintTextNameInTextField":
             MessageLookupByLibrary.simpleMessage("Наименование*"),
         "hopeMessageAppInInfo": MessageLookupByLibrary.simpleMessage(
@@ -74,15 +88,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "info": MessageLookupByLibrary.simpleMessage("Информация"),
         "language": MessageLookupByLibrary.simpleMessage("Язык"),
         "lightThemeModeName": MessageLookupByLibrary.simpleMessage("Светлая"),
+        "logInToGoogleDrive":
+            MessageLookupByLibrary.simpleMessage("Войти в Google Диск"),
+        "logOutOfGoogleDrive":
+            MessageLookupByLibrary.simpleMessage("Выйти из Google Диска"),
+        "loggedOutSuccessfully":
+            MessageLookupByLibrary.simpleMessage("Успешно вышли из системы"),
         "month": MessageLookupByLibrary.simpleMessage("месяц"),
         "notes": MessageLookupByLibrary.simpleMessage("Заметки"),
         "notification": MessageLookupByLibrary.simpleMessage("Уведомления"),
-        "notifyDayNInAdvanceAtHourNminuteN": m2,
-        "notifyInDatetimeNHoursminutes": m3,
+        "notifyDayNInAdvanceAtHourNminuteN": m3,
+        "notifyInDatetimeNHoursminutes": m4,
         "purposeMessageAppInInfo": MessageLookupByLibrary.simpleMessage(
             "Мы разработали это приложение с одной целью - чтобы вы никогда не забывали о своих важных делах. Наше приложение легко настраивается, чтобы обеспечить своевременные напоминания и помочь  успешно выполнять задачи."),
         "receiveNotificationsTime": MessageLookupByLibrary.simpleMessage(
             "В какое время хотите получать уведомления?"),
+        "recovery": MessageLookupByLibrary.simpleMessage("Восстановление"),
+        "restoreCompletedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Восстановление завершено успешно"),
         "save": MessageLookupByLibrary.simpleMessage("Сохранить"),
         "search": MessageLookupByLibrary.simpleMessage("Поиск"),
         "selectColor": MessageLookupByLibrary.simpleMessage("Выберите цвет"),
@@ -102,7 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Это тестовое уведомление. Всё работает!"),
         "titleNote": MessageLookupByLibrary.simpleMessage("Заголовок"),
-        "turnsN": m4,
+        "turnsN": m5,
         "twoWeeks": MessageLookupByLibrary.simpleMessage("2 недели"),
         "updateTask": MessageLookupByLibrary.simpleMessage("Обновить"),
         "week": MessageLookupByLibrary.simpleMessage("неделя"),

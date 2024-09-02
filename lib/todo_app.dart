@@ -1,5 +1,6 @@
 import 'package:todo/core/domain/repositories/note_repository.dart';
 import 'package:todo/core/domain/repositories/task_repository.dart';
+import 'package:todo/core/services/google_drive/google_drive_service.dart';
 
 import 'package:todo/core/utils/theme/theme.dart';
 import 'package:todo/features/home/cubit/home_cubit.dart';
@@ -18,6 +19,7 @@ class App extends StatelessWidget {
   final AbstractTaskRepository taskRepository;
   final AbstractSettingsRepository settingsRepository;
   final AbstractNoteRepository noteRepository;
+  final GoogleDriveService googleDriveService;
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
   static const String name = 'Task Calendar';
@@ -25,6 +27,7 @@ class App extends StatelessWidget {
 
   const App({
     super.key,
+    required this.googleDriveService,
     required this.taskRepository,
     required this.settingsRepository,
     required this.noteRepository,
@@ -43,6 +46,9 @@ class App extends StatelessWidget {
           RepositoryProvider.value(
             value: noteRepository,
           ),
+          RepositoryProvider.value(
+            value: googleDriveService,
+          ),
         ],
         child: MultiBlocProvider(
           providers: [
@@ -53,7 +59,9 @@ class App extends StatelessWidget {
                 create: (context) => SettingsBloc(
                     settingsRepository:
                         RepositoryProvider.of<AbstractSettingsRepository>(
-                            context))
+                            context),
+                    googleDriveService:
+                        RepositoryProvider.of<GoogleDriveService>(context))
                   ..add(const InitializeSettingsEvent())),
           ],
           child: const AppView(),
@@ -83,7 +91,7 @@ class _AppViewState extends State<AppView> {
       if (state.status == SettingsStatus.initial) {
         windowSize = MediaQuery.of(context).size;
       }
-      if (state.status == SettingsStatus.success) {
+      if (state.status != SettingsStatus.initial) {
         return MaterialApp.router(
           localizationsDelegates: const [
             S.delegate,

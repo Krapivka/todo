@@ -13,7 +13,7 @@ abstract class NoteLocalDataSource {
 }
 
 // ignore: constant_identifier_names
-const CACHED_NOTES_LIST = 'CACHED_NOTE_LIST2';
+const CACHED_NOTES_LIST = 'CACHED_NOTE_LIST';
 // ignore: constant_identifier_names
 const LAST_INDEX = 'LAST_NOTE_INDEX';
 

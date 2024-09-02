@@ -1,7 +1,9 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:package_info/package_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo/core/data/datasources/note_local_data_source.dart';
@@ -9,6 +11,7 @@ import 'package:todo/core/data/datasources/task_local_data_source.dart';
 import 'package:todo/core/data/repositories/note_repository_impl.dart';
 import 'package:todo/core/data/repositories/task_repository_impl.dart';
 import 'package:todo/core/services/ads/yandex_ads/open_ad/app_open_ad_manager.dart';
+import 'package:todo/core/services/google_drive/google_drive_service.dart';
 import 'package:todo/core/services/notification/notification_service.dart';
 import 'package:todo/features/settings/data/datasource/settings_local_data_source.dart';
 import 'package:todo/features/settings/data/repository/settings_repository.dart';
@@ -43,6 +46,10 @@ void main() async {
   //initialize local storage
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
+  final GoogleDriveService gds = GoogleDriveService();
+
+  gds.loginWithGoogle();
+
   final taskRepository = TaskRepository(
     localDataSource:
         TaskLocalDataSourceImpl(sharedPreferences: sharedPreferences),
@@ -59,7 +66,28 @@ void main() async {
   );
 
   runApp(App(
-      taskRepository: taskRepository,
-      settingsRepository: settingsRepository,
-      noteRepository: noteRepository));
+    taskRepository: taskRepository,
+    settingsRepository: settingsRepository,
+    noteRepository: noteRepository,
+    googleDriveService: gds,
+    //TODO: остановился здесь
+  ));
 }
+
+// Future<UserCredential> signInWithGoogle() async {
+//   // Trigger the authentication flow
+//   final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+//   // Obtain the auth details from the request
+//   final GoogleSignInAuthentication? googleAuth =
+//       await googleUser?.authentication;
+
+//   // Create a new credential
+//   final credential = GoogleAuthProvider.credential(
+//     accessToken: googleAuth?.accessToken,
+//     idToken: googleAuth?.idToken,
+//   );
+
+//   // Once signed in, return the UserCredential
+//   return await FirebaseAuth.instance.signInWithCredential(credential);
+// }

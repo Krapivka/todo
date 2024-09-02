@@ -24,12 +24,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(author) => "Author: ${author}";
 
-  static String m2(day, hour, minute) =>
+  static String m2(errorMessage) => "Error: ${errorMessage}";
+
+  static String m3(day, hour, minute) =>
       "notify ${day} days in advance at ${hour}:${minute}";
 
-  static String m3(dateTime) => "Notify in ${dateTime} hours/minutes";
+  static String m4(dateTime) => "Notify in ${dateTime} hours/minutes";
 
-  static String m4(nextAge) => "Turns ${nextAge}";
+  static String m5(nextAge) => "Turns ${nextAge}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -38,6 +40,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "addTaskButton": MessageLookupByLibrary.simpleMessage("Add task"),
         "appVersionN": m0,
         "authorN": m1,
+        "backup": MessageLookupByLibrary.simpleMessage("Backup"),
+        "backupCompletedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Backup completed successfully"),
+        "backupOnGoogleDrive":
+            MessageLookupByLibrary.simpleMessage("Backup on Google Drive"),
         "calendar": MessageLookupByLibrary.simpleMessage("Calendar"),
         "chooseDateFormat":
             MessageLookupByLibrary.simpleMessage("Select the date format:"),
@@ -46,12 +53,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "chooseTheme": MessageLookupByLibrary.simpleMessage("Select themes"),
         "chooseYourLanguage":
             MessageLookupByLibrary.simpleMessage("Select a language:"),
+        "createABackup":
+            MessageLookupByLibrary.simpleMessage("Create a backup"),
         "darkThemeModeName": MessageLookupByLibrary.simpleMessage("Dark"),
         "dateFormat": MessageLookupByLibrary.simpleMessage("Date format"),
         "daysShouldINotifyAboutTasks": MessageLookupByLibrary.simpleMessage(
             "How many days should notify about tasks?"),
         "deleted": MessageLookupByLibrary.simpleMessage("Deleted"),
         "descriptionForTask": MessageLookupByLibrary.simpleMessage("Описание"),
+        "doNotLoseDataWhenChangingYourDevice":
+            MessageLookupByLibrary.simpleMessage(
+                "Do not lose data when changing your device"),
         "emptyDayCalendar": MessageLookupByLibrary.simpleMessage(
             "There are no tasks on this day"),
         "emptyNoteList": MessageLookupByLibrary.simpleMessage(
@@ -62,8 +74,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter name"),
         "enterTheTextOfTheNote":
             MessageLookupByLibrary.simpleMessage("Enter the text of the note"),
+        "errorN": m2,
         "fillInTheRequiredFields":
             MessageLookupByLibrary.simpleMessage("Fill in the required fields"),
+        "googleDrive": MessageLookupByLibrary.simpleMessage("Google Drive"),
         "hintTextNameInTextField":
             MessageLookupByLibrary.simpleMessage("Title*"),
         "hopeMessageAppInInfo": MessageLookupByLibrary.simpleMessage(
@@ -74,15 +88,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "info": MessageLookupByLibrary.simpleMessage("Info"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "lightThemeModeName": MessageLookupByLibrary.simpleMessage("Light"),
+        "logInToGoogleDrive":
+            MessageLookupByLibrary.simpleMessage("Log in to Google Drive"),
+        "logOutOfGoogleDrive":
+            MessageLookupByLibrary.simpleMessage("Log out of Google Drive"),
+        "loggedOutSuccessfully":
+            MessageLookupByLibrary.simpleMessage("Logged out successfully"),
         "month": MessageLookupByLibrary.simpleMessage("month"),
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
         "notification": MessageLookupByLibrary.simpleMessage("Notifications"),
-        "notifyDayNInAdvanceAtHourNminuteN": m2,
-        "notifyInDatetimeNHoursminutes": m3,
+        "notifyDayNInAdvanceAtHourNminuteN": m3,
+        "notifyInDatetimeNHoursminutes": m4,
         "purposeMessageAppInInfo": MessageLookupByLibrary.simpleMessage(
             "We have developed this application with one goal in mind - so that you never forget about your important business. Our app is easily customizable to provide timely reminders and help you complete tasks successfully."),
         "receiveNotificationsTime": MessageLookupByLibrary.simpleMessage(
             "What time do you want to receive notifications?"),
+        "recovery": MessageLookupByLibrary.simpleMessage("Recovery"),
+        "restoreCompletedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Restore completed successfully"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "selectColor": MessageLookupByLibrary.simpleMessage("Select color"),
@@ -101,7 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "This is a test notification. It\'s all right!"),
         "titleNote": MessageLookupByLibrary.simpleMessage("Title"),
-        "turnsN": m4,
+        "turnsN": m5,
         "twoWeeks": MessageLookupByLibrary.simpleMessage("2 weeks"),
         "updateTask": MessageLookupByLibrary.simpleMessage("Update task"),
         "week": MessageLookupByLibrary.simpleMessage("week"),
